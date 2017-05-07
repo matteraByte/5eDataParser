@@ -1,7 +1,6 @@
 from Parser.JsonFileMonsterParser import JsonFileMonsterParser
 
 fileLocation = "../Resources/5e-SRD-Monsters[DMTOOLS].json"
-invalidJsonFile = "../Resources/InvalidJson.json"
 decoded = []
 
 file_parser = JsonFileMonsterParser(fileLocation)
