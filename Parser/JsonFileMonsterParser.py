@@ -13,12 +13,14 @@ class JsonBlobMonsterParser(object):
         monster_entry_parser = JsonMonsterAttributeParser(entry)
         name = monster_entry_parser.get_name()
         if name != "":
+            """basics"""
             monster = Monster(name)
             monster.size = monster_entry_parser.get_size()
             monster.subtype = monster_entry_parser.get_subtype()
+
+            """complex types"""
             monster.special_abilities = monster_entry_parser.get_special_abilities()
             monster.actions = monster_entry_parser.get_actions()
-            monster.special_abilities = monster_entry_parser.get_special_abilities()
             monster.legendary_actions = monster_entry_parser.get_legendary_actions()
         return monster
 
