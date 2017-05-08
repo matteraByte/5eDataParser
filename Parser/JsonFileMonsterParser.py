@@ -5,7 +5,11 @@ from Parser.JsonMonsterAttributeParser import JsonMonsterAttributeParser
 
 class JsonBlobMonsterParser(object):
     def __init__(self, json_blob):
-        self.json_blob = json_blob
+        try:
+            self.decoded_json = json.loads(json_blob)
+        except (ValueError, KeyError, TypeError):
+            print("Error loading input JSON. Invalid format.")
+            raise
 
     @staticmethod
     def get_monster(entry):
@@ -26,16 +30,11 @@ class JsonBlobMonsterParser(object):
 
     def get_monster_list(self):
         monster_list = []
-        try:
-            decoded_json = json.loads(self.json_blob)
-        except (ValueError, KeyError, TypeError):
-            print("Error loading input JSON. Invalid format.")
-            raise
 
-        for entry in decoded_json:
-                monster = self.get_monster(entry)
-                if monster:
-                    monster_list.append(monster)
+        for entry in self.decoded_json:
+            monster = self.get_monster(entry)
+            if monster:
+                monster_list.append(monster)
 
         return monster_list
 
