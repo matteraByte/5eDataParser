@@ -53,10 +53,8 @@ class XmlMonsterAttributeParser(object):
         result = []
         for entry in monster_abilities:
             ability = MonsterSpecialAbility()
-            # ability.attack_bonus = self.get_attribute_from_entry(entry, "attack_bonus")
-            ability.attack_bonus = 0
             ability.name = self.get_attribute_text_from_entry(entry, self.MONSTER_FIELDS.SPECIAL_ABILITIES.NAME)
-            ability.description = self.get_attribute_text_from_entry(entry, self.MONSTER_FIELDS.SPECIAL_ABILITIES.DESCRIPTION)
+            ability.description = self.get_description(entry, self.MONSTER_FIELDS.SPECIAL_ABILITIES.DESCRIPTION)
             result.append(ability)
         return result
 
@@ -66,24 +64,94 @@ class XmlMonsterAttributeParser(object):
         """
         monster_actions = self.get_attribute_from_entry(self.entry, self.MONSTER_FIELDS.ACTIONS.ROOT)
         result = []
-        for entry in monster_actions:
+        for monster_action in monster_actions:
             action = MonsterAction()
-            action.name = self.get_attribute_text_from_entry(entry, self.MONSTER_FIELDS.ACTIONS.NAME)
+            action.name = self.get_attribute_text_from_entry(monster_action, self.MONSTER_FIELDS.ACTIONS.NAME)
             """could have multiple text lines"""
-            action.description = self.getAppendedDescription(self.get_attribute_from_entry(entry, self.MONSTER_FIELDS.ACTIONS.NAME))
+            action.description = self.get_description(monster_action, self.MONSTER_FIELDS.ACTIONS.DESCRIPTION)
+            action.attack_bonus = self.get_attack_bonus(monster_action, self.MONSTER_FIELDS.ACTIONS.ATTACK_BONUS)
+            action.damage_dice = self.get_damage_dice(monster_action, self.MONSTER_FIELDS.ACTIONS.DAMAGE_DICE)
+            action.damage_bonus = self.get_damage_bonus(monster_action, self.MONSTER_FIELDS.ACTIONS.DAMAGE_BONUS)
             result.append(action)
 
         return result
 
-    """
-    :rtype: str
-    """
-    def getAppendedDescription(self, descriptions_list):
+    def get_damage_bonus(self, entry, field_name):
+        return self.get_damage_bonus_from_attack_string(
+            self.get_attribute_text_from_entry(entry, field_name))
+
+    def get_damage_dice(self, entry, field_name):
+        return self.get_damage_dice_from_attack_string(
+            self.get_attribute_text_from_entry(entry, field_name))
+
+    def get_attack_bonus(self, entry, field_name):
+        return self.get_attack_bonus_from_attack_string(
+            self.get_attribute_text_from_entry(entry, field_name))
+
+    def get_description(self, entry, field_name):
+        return self.get_appended_nodes(
+            self.get_attribute_from_entry(entry, field_name))
+
+    @staticmethod
+    def get_attack_bonus_from_attack_string(attack_string):
+        """
+        :type: attack_string str
+        :rtype: int
+        """
+        result = 0
+        attack_array = attack_string.split('|')
+        if len(attack_array) > 1:
+            try:
+                result = int(attack_array[1])
+            except:
+                """just return zero"""
+                result = 0
+        return result
+
+    @staticmethod
+    def get_damage_dice_from_attack_string(attack_string):
+        """
+        :type: attack_string str
+        :rtype: str
+        """
         result = ""
-        # TODO: impliment
-        # for text_node in descriptions_list:
-        #     result += self.get_attribute_text_from_entry(text_node, )
-        #     result
+        attack_array = attack_string.split('|')
+        if len(attack_array) > 2:
+            damage_array = attack_array[2].split('+')
+            if len(damage_array) > 0:
+                result = damage_array[0]
+
+        return result
+
+    @staticmethod
+    def get_damage_bonus_from_attack_string(attack_string):
+        """
+        :type: attack_string str
+        :rtype: int
+        """
+        result = 0
+        attack_array = attack_string.split('|')
+        if len(attack_array) > 2:
+            damage_array = attack_array[2].split('+')
+            if len(damage_array) > 1:
+                try:
+                    result = int(damage_array[1])
+                except:
+                    result = 0
+
+        return result
+
+    @staticmethod
+    def get_appended_nodes(same_node_list):
+        """
+        :rtype: str
+        """
+        result = ""
+
+        for text_node in same_node_list:
+            if result != "":
+                result += " \n"  # add a space and a newline between each text node
+            result += text_node.text
         return result
 
     def get_legendary_actions(self):

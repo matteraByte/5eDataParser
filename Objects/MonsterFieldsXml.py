@@ -19,13 +19,13 @@ class MonsterFieldsSpecialAbilities(object):
         self.ROOT = 'trait'
         self.NAME = 'name'
         self.DESCRIPTION = 'text'
-        # TODO: don't think traits need these
-        # self.ATTACK_BONUS = 'attack_bonus'
+
 
 class MonsterFieldsActions(object):
     def __init__(self):
         self.ROOT = 'action'
         self.NAME = 'name'
-        self.DESCRIPTION = 'text'  # TODO: could have multiple <text> nodes
-        self.DAMAGE_DICE = 'attack'  # TODO: need to parse out of this field
-        self.ATTACK_BONUS = 'attack'  # TODO: need to parse out of this field
+        self.DESCRIPTION = 'text'  # could be multiple nodes that need to be stitched together
+        self.DAMAGE_DICE = 'attack'  # need to parse out this field
+        self.DAMAGE_BONUS = 'attack'  # need to parse out this field
+        self.ATTACK_BONUS = 'attack'  # need to parse out this field
