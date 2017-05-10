@@ -9,10 +9,10 @@ class MonsterFieldsJson(object):
         self.NAME = 'name'
         self.TYPE = 'type'
         self.SIZE = 'size'
-        self.SPECIAL_ABILITIES = MonsterFieldsSpecialAbilitiesJson()
+        self.SPECIAL_ABILITIES = MonsterFieldsSpecialAbilities()
 
 
-class MonsterFieldsSpecialAbilitiesJson(object):
+class MonsterFieldsSpecialAbilities(object):
     def __init__(self):
         """Special Abilities"""
         self.ROOT = 'special_abilities'

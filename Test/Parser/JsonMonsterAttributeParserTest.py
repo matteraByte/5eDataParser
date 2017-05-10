@@ -1,6 +1,6 @@
 import unittest, json
 from Parser.JsonMonsterAttributeParser import JsonMonsterAttributeParser as AttributeParser
-from Objects.MonsterFieldsJson import MonsterFieldsJson
+from Objects.MonsterFieldsJson import MonsterFieldsJson as MonsterFields
 
 
 class JsonMonsterAttributeParserTest(unittest.TestCase):
@@ -12,14 +12,14 @@ class JsonMonsterAttributeParserTest(unittest.TestCase):
             self.json_input = inputFile.read().replace('\n', '')
 
         self.decoded_json = json.loads(self.json_input)
-        self.MONSTER_FIELDS = MonsterFieldsJson()
+        self.MONSTER_FIELDS = MonsterFields()
         self.parser = AttributeParser(self.decoded_json)
 
     def test_get_attribute(self):
         expected = "Aboleth"
         result = None
 
-        result = self.parser.get_attribute_from_json_entry(self.decoded_json, self.MONSTER_FIELDS.NAME)
+        result = self.parser.get_attribute_from_entry(self.decoded_json, self.MONSTER_FIELDS.NAME)
         self.assertEquals(result, expected)
         result = self.parser.get_attribute(self.MONSTER_FIELDS.NAME)
         self.assertEquals(result, expected)
