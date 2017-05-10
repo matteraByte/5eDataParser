@@ -4,9 +4,11 @@ class Monster(object):
             name: String, The monster's name.
             size: String, Text description of the monster's size (tiny, small, medium, large, huge, gargantuan)
             type: String, Monster's type (humanoid, undead, fiend)
-        """
+    """
     def __init__(self, name):
         """Return a Monster object whose name is *name*"""
+
+        self.SIZE_LIST = ["tiny", "small", "medium", "large", "huge", "gargantuan"]
         self.name = name
         self.size = ""
         self.type = ""

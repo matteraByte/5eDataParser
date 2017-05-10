@@ -1,6 +1,11 @@
 import json
+import logging
+import logging.config
 from Parser.Monster import Monster
 from Parser.JsonMonsterAttributeParser import JsonMonsterAttributeParser
+
+logging.config.fileConfig('../../Resources/Logging/logging.conf')
+logger = logging.getLogger('basicLog')
 
 
 class JsonBlobMonsterParser(object):
@@ -8,7 +13,9 @@ class JsonBlobMonsterParser(object):
         try:
             self.decoded_json = json.loads(json_blob)
         except (ValueError, KeyError, TypeError):
-            print("Error loading input JSON. Invalid format.")
+            logger.error("Context=" + __class__.__name__ +
+                         "|Message=" + "Problem loading input JSON. Invalid format." +
+                         "|Json=" + json_blob)
             raise
 
     @staticmethod
@@ -50,10 +57,11 @@ class JsonFileMonsterParser(object):
                 json_input = inputFile.read().replace('\n', '')
                 self.json_blob_parser = JsonBlobMonsterParser(json_input)
         except FileNotFoundError:
-            # TODO: use printerr library
-            print("Error: File not found. ", self.file_path)
+            logger.error("Context=" + __class__.__name__ + "|Message=" + "File not found." + "|Path=" + self.file_path)
             raise
         if self.json_blob_parser:
             return self.json_blob_parser.get_monster_list()
         else:
-            print("Error: cannot get monster list from Json")
+            logger.error("Context=" + __class__.__name__ +
+                         "|Message=" + "Cannot get monster list from Json." +
+                         "|Path=" + self.file_path)

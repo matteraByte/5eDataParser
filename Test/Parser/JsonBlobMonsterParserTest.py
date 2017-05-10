@@ -1,6 +1,12 @@
-import unittest, json
+import unittest
+import json
+import logging
+import logging.config
 from Parser.JsonFileMonsterParser import JsonBlobMonsterParser
 from Parser.Monster import Monster
+
+logging.config.fileConfig('../../Resources/Logging/logging.conf')
+logger = logging.getLogger('basicLog')
 
 
 class JsonBlobMonsterParserTest(unittest.TestCase):
@@ -15,7 +21,9 @@ class JsonBlobMonsterParserTest(unittest.TestCase):
         try:
             self.decoded_monster = json.loads(self.monster_json_blob)
         except (ValueError, KeyError, TypeError):
-            print("Error loading input JSON. Invalid format.")
+            logger.error("Context=" + __class__.__name__ +
+                         "|Message=" + "Error loading input JSON. Invalid format." +
+                         "|Json=" + self.monster_json_blob)
             raise
 
         with open(self.srd_monsters_file_path, 'r') as inputFile:
