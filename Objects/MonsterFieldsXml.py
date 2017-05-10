@@ -9,6 +9,8 @@ class MonsterFieldsXml(object):
         self.NAME = 'name'
         self.TYPE = 'type'
         self.SIZE = 'size'
+
+        """Complex Fields"""
         self.SPECIAL_ABILITIES = MonsterFieldsSpecialAbilities()
         self.ACTIONS = MonsterFieldsActions()
         self.LEGENDARY_ACTIONS = MonsterLegendaryActions()
