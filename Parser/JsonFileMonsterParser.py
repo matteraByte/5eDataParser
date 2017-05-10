@@ -1,10 +1,11 @@
 import json
 import logging
 import logging.config
+import definitions
 from Parser.Monster import Monster
 from Parser.JsonMonsterAttributeParser import JsonMonsterAttributeParser
 
-logging.config.fileConfig('../../Resources/Logging/logging.conf')
+logging.config.fileConfig(definitions.LOGGING_CONFIG_PATH)
 logger = logging.getLogger('basicLog')
 
 
