@@ -38,14 +38,13 @@ class XmlMonsterAttributeParserTest(unittest.TestCase):
         self.assertEquals(result, expected)
 
     def test_get_special_abilities(self):
-        special_abilities = self.parser.get_special_abilities()
-        self.assertNotEquals(len(special_abilities), 0)
-        ability1 = special_abilities[0]
-        ability2 = special_abilities[1]
-        self.assertEquals(ability1.name, "Amphibious")
-        self.assertEquals(ability1.description, "The aboleth can breathe air and water.")
-        self.assertEquals(ability1.attack_bonus, 0)
-        self.assertEquals(ability2.name, "Mucous Cloud")
+        special_ability_list = self.parser.get_special_abilities()
+        self.assertNotEquals(len(special_ability_list), 0)
+        ability_1 = special_ability_list[0]
+        ability_2 = special_ability_list[1]
+        self.assertEquals(ability_1.name, "Amphibious")
+        self.assertEquals(ability_1.description, "The aboleth can breathe air and water.")
+        self.assertEquals(ability_2.name, "Mucous Cloud")
         missing_special_abilities = self.parser_missing_fields.get_special_abilities()
         self.assertEquals(len(missing_special_abilities), 0)
 
@@ -91,28 +90,47 @@ class XmlMonsterAttributeParserTest(unittest.TestCase):
     def test_get_actions(self):
         actions = self.parser.get_actions()
         self.assertNotEquals(len(actions), 0)
-        action1 = actions[0]
-        action2 = actions[1]
-        # action3 = actions[2]
-        action4 = actions[3]
-        self.assertEquals(action1.name, "Multiattack")
-        self.assertEquals(action1.description, "The aboleth makes three tentacle attacks.")
-        self.assertEquals(action1.damage_dice, "")
-        self.assertEquals(action1.attack_bonus, 0)
-        self.assertEquals(action1.damage_bonus, 0)
-        self.assertEquals(action4.name, "Enslave (3/day)")
-        self.assertEquals(action4.description, "The aboleth targets one creature it can see within 30 ft. of it. "
-                                               "The target must succeed on a DC 14 Wisdom saving throw or be magically "
-                                               "charmed by the aboleth until the aboleth dies or until it is on a "
-                                               "different plane of existence from the target. The charmed target is "
-                                               "under the aboleth's control and can't take reactions, and the aboleth "
-                                               "and the target can communicate telepathically with each other over any "
-                                               "distance. \nWhenever the charmed target takes damage, the target can "
-                                               "repeat the saving throw. On a success, the effect ends. No more than "
-                                               "once every 24 hours, the target can also repeat the saving throw when "
-                                               "it is at least 1 mile away from the aboleth.")
-        self.assertEquals(action2.name, "Tentacle")
-        self.assertEquals(action2.attack_bonus, 9)
-        self.assertEquals(action2.damage_bonus, 5)
-        self.assertEquals(action2.damage_dice, "2d6")
 
+        action_1 = actions[0]
+        action_2 = actions[1]
+        action_4 = actions[3]
+
+        self.assertEquals(action_1.name, "Multiattack")
+        self.assertEquals(action_1.description, "The aboleth makes three tentacle attacks.")
+        self.assertEquals(action_1.damage_dice, "")
+        self.assertEquals(action_1.attack_bonus, 0)
+        self.assertEquals(action_1.damage_bonus, 0)
+
+        self.assertEquals(action_2.name, "Tentacle")
+        self.assertEquals(action_2.attack_bonus, 9)
+        self.assertEquals(action_2.damage_bonus, 5)
+        self.assertEquals(action_2.damage_dice, "2d6")
+
+        self.assertEquals(action_4.name, "Enslave (3/day)")
+        self.assertEquals(action_4.description, "The aboleth targets one creature it can see within 30 ft. of it. "
+                                                "The target must succeed on a DC 14 Wisdom saving throw or be magically"
+                                                " charmed by the aboleth until the aboleth dies or until it is on a "
+                                                "different plane of existence from the target. The charmed target is "
+                                                "under the aboleth's control and can't take reactions, and the aboleth "
+                                                "and the target can communicate telepathically with each other over any"
+                                                " distance. \nWhenever the charmed target takes damage, the target can "
+                                                "repeat the saving throw. On a success, the effect ends. No more than "
+                                                "once every 24 hours, the target can also repeat the saving throw when "
+                                                "it is at least 1 mile away from the aboleth.")
+
+    def test_get_legendary_actions(self):
+        legendary_action_list = self.parser.get_legendary_actions()
+        self.assertNotEquals(len(legendary_action_list), 0)
+
+        legendary_action_1 = legendary_action_list[0]
+        legendary_action_3 = legendary_action_list[2]
+
+        self.assertEquals(legendary_action_1.name, "Detect")
+        self.assertEquals(legendary_action_1.description, "The aboleth makes a Wisdom (Perception) check.")
+        self.assertEquals(legendary_action_1.damage_dice, "")
+        self.assertEquals(legendary_action_1.attack_bonus, 0)
+        self.assertEquals(legendary_action_1.damage_bonus, 0)
+        self.assertEquals(legendary_action_3.name, "Psychic Drain (Costs 2 Actions)")
+        self.assertEquals(legendary_action_3.attack_bonus, 0)
+        self.assertEquals(legendary_action_3.damage_bonus, 0)
+        self.assertEquals(legendary_action_3.damage_dice, "3d6")

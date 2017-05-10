@@ -20,17 +20,15 @@ class MonsterSpecialAbility(object):
     def __init__(self):
         self.name = ""
         self.description = ""
-        """attack_bonus int"""
-        self.attack_bonus = 0
 
 
 class MonsterAction(object):
     def __init__(self):
         self.name = ""
         self.description = ""
+        self.damage_dice = ""
         """attack_bonus int"""
         self.attack_bonus = 0
-        self.damage_dice = ""
         """damage_bonus int"""
         self.damage_bonus = 0
 
@@ -39,6 +37,7 @@ class MonsterLegendaryAction(object):
     def __init__(self):
         self.name = ""
         self.description = ""
+        self.damage_dice = ""
         """attack_bonus int"""
         self.attack_bonus = 0
         """damage_bonus int"""

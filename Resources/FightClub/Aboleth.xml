@@ -62,6 +62,7 @@
             <legendary>
                 <name>Psychic Drain (Costs 2 Actions)</name>
                 <text>One creature charmed by the aboleth takes 10 (3d6) psychic damage, and the aboleth regains hit points equal to the damage the creature takes.</text>
+                <attack>Psychic Drain||3d6</attack>
             </legendary>
         </monster>
 </compendium>
