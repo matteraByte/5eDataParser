@@ -1,4 +1,6 @@
 import unittest
+import definitions
+import os
 import xml.etree.ElementTree as etree
 from Parser.XmlMonsterAttributeParser import XmlMonsterAttributeParser as AttributeParser
 from Objects.MonsterFieldsXml import MonsterFieldsXml as MonsterFields
@@ -10,12 +12,12 @@ class XmlMonsterAttributeParserTest(unittest.TestCase):
     def setUp(self):
         self.MONSTER_FIELDS = MonsterFields()
 
-        self.monster_entry = "../../Resources/FightClub/Aboleth.xml"
+        self.monster_entry = os.path.join(definitions.XML_RESOURCES_PATH, "Aboleth.xml")
         tree = etree.parse(self.monster_entry)
         self.root = tree.getroot().find("monster")
         self.parser = AttributeParser(self.root)
 
-        self.monster_missing_fields = "../../Resources/FightClub/MissingFields.xml"
+        self.monster_missing_fields = os.path.join(definitions.XML_RESOURCES_PATH, "MissingFields.xml")
         tree = etree.parse(self.monster_missing_fields)
         self.root_missing_fields = tree.getroot().find("monster")
         self.parser_missing_fields = AttributeParser(self.root_missing_fields)

@@ -53,8 +53,10 @@ class XmlMonsterAttributeParser(object):
         result = []
         for monster_ability in ability_list:
             ability = MonsterSpecialAbility()
-            ability.name = self.get_attribute_text_from_entry(monster_ability, self.MONSTER_FIELDS.SPECIAL_ABILITIES.NAME)
-            ability.description = self.get_description(monster_ability, self.MONSTER_FIELDS.SPECIAL_ABILITIES.DESCRIPTION)
+            ability.name = self.get_attribute_text_from_entry(
+                monster_ability, self.MONSTER_FIELDS.SPECIAL_ABILITIES.NAME)
+            ability.description = self.get_description(
+                monster_ability, self.MONSTER_FIELDS.SPECIAL_ABILITIES.DESCRIPTION)
             result.append(ability)
         return result
 

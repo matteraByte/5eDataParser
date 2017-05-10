@@ -2,10 +2,12 @@ import unittest
 import json
 import logging
 import logging.config
+import definitions
+import os
 from Parser.JsonFileMonsterParser import JsonBlobMonsterParser
 from Parser.Monster import Monster
 
-logging.config.fileConfig('../../Resources/Logging/logging.conf')
+logging.config.fileConfig(definitions.LOGGING_CONFIG_PATH)
 logger = logging.getLogger('basicLog')
 
 
