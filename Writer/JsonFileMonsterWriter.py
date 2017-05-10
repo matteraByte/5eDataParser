@@ -1,6 +1,6 @@
 import json
 from Parser.Monster import Monster, MonsterSpecialAbility
-from Objects.MonsterFieldsJson import MonsterFieldsJson, MonsterFieldsSpecialAbilitiesJson
+from Objects.MonsterFieldsJson import MonsterFieldsJson, MonsterFieldsSpecialAbilities
 
 
 class JsonBlobMonsterBuilder(object):
@@ -10,7 +10,7 @@ class JsonBlobMonsterBuilder(object):
     def __init__(self, monster_list):
         self.monster_list = monster_list
         self.fields = MonsterFieldsJson()
-        self.special_abilities_fields = MonsterFieldsSpecialAbilitiesJson()
+        self.special_abilities_fields = MonsterFieldsSpecialAbilities()
 
     def build_json_blob(self):
         json_root = []

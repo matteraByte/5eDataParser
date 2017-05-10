@@ -50,6 +50,7 @@ class JsonFileMonsterParser(object):
                 json_input = inputFile.read().replace('\n', '')
                 self.json_blob_parser = JsonBlobMonsterParser(json_input)
         except FileNotFoundError:
+            # TODO: use printerr library
             print("Error: File not found. ", self.file_path)
             raise
         if self.json_blob_parser:

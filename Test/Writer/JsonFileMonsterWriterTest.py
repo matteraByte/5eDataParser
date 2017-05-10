@@ -1,7 +1,7 @@
 from Parser.JsonFileMonsterParser import JsonFileMonsterParser
 from Writer.JsonFileMonsterWriter import JsonFileMonsterWriter, JsonBlobMonsterBuilder
 
-fileLocation = "../../Resources/5e-SRD-Monsters[DMTOOLS].json"
+fileLocation = "../../Resources/DMTools/5e-SRD-Monsters[DMTOOLS].json"
 decoded = []
 
 file_parser = JsonFileMonsterParser(fileLocation)

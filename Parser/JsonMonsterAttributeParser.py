@@ -13,7 +13,7 @@ class JsonMonsterAttributeParser(object):
         self.entry = entry
 
     @staticmethod
-    def get_attribute_from_json_entry(json_entry, attribute_name):
+    def get_attribute_from_entry(json_entry, attribute_name):
         attribute = ""
         try:
             attribute = json_entry[attribute_name]
@@ -22,7 +22,7 @@ class JsonMonsterAttributeParser(object):
         return attribute
 
     def get_attribute(self, attribute_name):
-        return self.get_attribute_from_json_entry(self.entry, attribute_name)
+        return self.get_attribute_from_entry(self.entry, attribute_name)
 
     def get_name(self):
         """Gets the name of the monster from json entry"""
@@ -40,10 +40,9 @@ class JsonMonsterAttributeParser(object):
         if monster_abilities != "":
             for entry in monster_abilities:
                 ability = MonsterSpecialAbility()
-                ability.attack_bonus = self.get_attribute_from_json_entry(entry, "attack_bonus")
-                ability.name = self.get_attribute_from_json_entry(entry, "name")
-                ability.description = self.get_attribute_from_json_entry(entry, "desc")
-                """TODO: Since using generic method for grabbing int too, need to set default to 0"""
+                ability.attack_bonus = self.get_attribute_from_entry(entry, "attack_bonus")
+                ability.name = self.get_attribute_from_entry(entry, "name")
+                ability.description = self.get_attribute_from_entry(entry, "desc")
                 result.append(ability)
         return result
 
@@ -53,12 +52,11 @@ class JsonMonsterAttributeParser(object):
         if monster_actions != "":
             for entry in monster_actions:
                 action = MonsterAction()
-                """TODO: Since using generic method for grabbing int too, need to set default to 0"""
-                action.attack_bonus = self.get_attribute_from_json_entry(entry, "attack_bonus")
-                action.name = self.get_attribute_from_json_entry(entry, "name")
-                action.description = self.get_attribute_from_json_entry(entry, "desc")
-                action.damage_dice = self.get_attribute_from_json_entry(entry, "damage_dice")
-                action.damage_bonus = self.get_attribute_from_json_entry(entry, "damage_bonus")
+                action.attack_bonus = self.get_attribute_from_entry(entry, "attack_bonus")
+                action.name = self.get_attribute_from_entry(entry, "name")
+                action.description = self.get_attribute_from_entry(entry, "desc")
+                action.damage_dice = self.get_attribute_from_entry(entry, "damage_dice")
+                action.damage_bonus = self.get_attribute_from_entry(entry, "damage_bonus")
                 result.append(action)
         return result
 
@@ -68,11 +66,10 @@ class JsonMonsterAttributeParser(object):
         if monster_legendary_actions != "":
             for entry in monster_legendary_actions:
                 legendaryAction = MonsterLegendaryAction()
-                """TODO: Since using generic method for grabbing int too, need to set default to 0"""
-                legendaryAction.attack_bonus = self.get_attribute_from_json_entry(entry, "attack_bonus")
-                legendaryAction.name = self.get_attribute_from_json_entry(entry, "name")
-                legendaryAction.description = self.get_attribute_from_json_entry(entry, "desc")
-                legendaryAction.damage_dice = self.get_attribute_from_json_entry(entry, "damage_dice")
-                legendaryAction.damage_bonus = self.get_attribute_from_json_entry(entry, "damage_bonus")
+                legendaryAction.attack_bonus = self.get_attribute_from_entry(entry, "attack_bonus")
+                legendaryAction.name = self.get_attribute_from_entry(entry, "name")
+                legendaryAction.description = self.get_attribute_from_entry(entry, "desc")
+                legendaryAction.damage_dice = self.get_attribute_from_entry(entry, "damage_dice")
+                legendaryAction.damage_bonus = self.get_attribute_from_entry(entry, "damage_bonus")
                 result.append(legendaryAction)
         return result
