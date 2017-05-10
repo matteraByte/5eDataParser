@@ -49,12 +49,12 @@ class XmlMonsterAttributeParser(object):
         """
         :rtype: list of MonsterSpecialAbility
         """
-        monster_abilities = self.get_attribute_from_entry(self.entry, self.MONSTER_FIELDS.SPECIAL_ABILITIES.ROOT)
+        ability_list = self.get_attribute_from_entry(self.entry, self.MONSTER_FIELDS.SPECIAL_ABILITIES.ROOT)
         result = []
-        for entry in monster_abilities:
+        for monster_ability in ability_list:
             ability = MonsterSpecialAbility()
-            ability.name = self.get_attribute_text_from_entry(entry, self.MONSTER_FIELDS.SPECIAL_ABILITIES.NAME)
-            ability.description = self.get_description(entry, self.MONSTER_FIELDS.SPECIAL_ABILITIES.DESCRIPTION)
+            ability.name = self.get_attribute_text_from_entry(monster_ability, self.MONSTER_FIELDS.SPECIAL_ABILITIES.NAME)
+            ability.description = self.get_description(monster_ability, self.MONSTER_FIELDS.SPECIAL_ABILITIES.DESCRIPTION)
             result.append(ability)
         return result
 
@@ -62,12 +62,12 @@ class XmlMonsterAttributeParser(object):
         """
         :rtype: list of MonsterAction
         """
-        monster_actions = self.get_attribute_from_entry(self.entry, self.MONSTER_FIELDS.ACTIONS.ROOT)
+        action_list = self.get_attribute_from_entry(self.entry, self.MONSTER_FIELDS.ACTIONS.ROOT)
         result = []
-        for monster_action in monster_actions:
+        for monster_action in action_list:
             action = MonsterAction()
             action.name = self.get_attribute_text_from_entry(monster_action, self.MONSTER_FIELDS.ACTIONS.NAME)
-            """could have multiple text lines"""
+            """description could have multiple text lines"""
             action.description = self.get_description(monster_action, self.MONSTER_FIELDS.ACTIONS.DESCRIPTION)
             action.attack_bonus = self.get_attack_bonus(monster_action, self.MONSTER_FIELDS.ACTIONS.ATTACK_BONUS)
             action.damage_dice = self.get_damage_dice(monster_action, self.MONSTER_FIELDS.ACTIONS.DAMAGE_DICE)
@@ -158,32 +158,22 @@ class XmlMonsterAttributeParser(object):
         """
         :rtype: list of MonsterLegendaryAction
         """
+        monster_legendary_action_list = self.get_attribute_from_entry(self.entry, self.MONSTER_FIELDS.LEGENDARY_ACTIONS.ROOT)
         result = []
+        for monster_legendary_action in monster_legendary_action_list:
+            legendary_action = MonsterLegendaryAction()
+            legendary_action.name = self.get_attribute_text_from_entry(
+                monster_legendary_action, self.MONSTER_FIELDS.LEGENDARY_ACTIONS.NAME)
+            """description could have multiple text lines"""
+            legendary_action.description = self.get_description(
+                monster_legendary_action, self.MONSTER_FIELDS.LEGENDARY_ACTIONS.DESCRIPTION)
+            legendary_action.attack_bonus = self.get_attack_bonus(
+                monster_legendary_action, self.MONSTER_FIELDS.LEGENDARY_ACTIONS.ATTACK_BONUS)
+            legendary_action.damage_dice = self.get_damage_dice(
+                monster_legendary_action, self.MONSTER_FIELDS.LEGENDARY_ACTIONS.DAMAGE_DICE)
+            legendary_action.damage_bonus = self.get_damage_bonus(
+                monster_legendary_action, self.MONSTER_FIELDS.LEGENDARY_ACTIONS.DAMAGE_BONUS)
+            result.append(legendary_action)
+
         return result
 
-    #     monster_actions = self.get_attribute("actions")
-    #     result = []
-    #     if monster_actions != "":
-    #         for entry in monster_actions:
-    #             action = MonsterAction()
-    #             action.attack_bonus = self.get_attribute_from_json_entry(entry, "attack_bonus")
-    #             action.name = self.get_attribute_from_json_entry(entry, "name")
-    #             action.description = self.get_attribute_from_json_entry(entry, "desc")
-    #             action.damage_dice = self.get_attribute_from_json_entry(entry, "damage_dice")
-    #             action.damage_bonus = self.get_attribute_from_json_entry(entry, "damage_bonus")
-    #             result.append(action)
-    #     return result
-    #
-    # def get_legendary_actions(self):
-    #     monster_legendary_actions = self.get_attribute("legendary_actions")
-    #     result = []
-    #     if monster_legendary_actions != "":
-    #         for entry in monster_legendary_actions:
-    #             legendaryAction = MonsterLegendaryAction()
-    #             legendaryAction.attack_bonus = self.get_attribute_from_json_entry(entry, "attack_bonus")
-    #             legendaryAction.name = self.get_attribute_from_json_entry(entry, "name")
-    #             legendaryAction.description = self.get_attribute_from_json_entry(entry, "desc")
-    #             legendaryAction.damage_dice = self.get_attribute_from_json_entry(entry, "damage_dice")
-    #             legendaryAction.damage_bonus = self.get_attribute_from_json_entry(entry, "damage_bonus")
-    #             result.append(legendaryAction)
-    #     return result
