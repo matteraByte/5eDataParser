@@ -1,5 +1,5 @@
 from Parser.Monster import Monster, MonsterSpecialAbility, MonsterAction, MonsterLegendaryAction
-from Objects.MonsterFieldsXml import *
+from Objects.MonsterFieldsXml import MonsterFieldsXml as XML_FIELDS
 
 
 class XmlMonsterAttributeParser(object):
@@ -12,7 +12,6 @@ class XmlMonsterAttributeParser(object):
 
     def __init__(self, entry):
         self.entry = entry
-        self.MONSTER_FIELDS = MonsterFieldsXml()
 
     @staticmethod
     def get_attribute_from_entry(xml_root, node_name):
@@ -36,7 +35,7 @@ class XmlMonsterAttributeParser(object):
 
     def get_name(self):
         """Gets the name of the monster from xml node"""
-        return self.get_attribute(self.MONSTER_FIELDS.NAME)
+        return self.get_attribute(XML_FIELDS.NAME)
 
     # def get_size(self):
     #     return self.get_attribute("size")
@@ -49,14 +48,14 @@ class XmlMonsterAttributeParser(object):
         """
         :rtype: list of MonsterSpecialAbility
         """
-        ability_list = self.get_attribute_from_entry(self.entry, self.MONSTER_FIELDS.SPECIAL_ABILITIES.ROOT)
+        ability_list = self.get_attribute_from_entry(self.entry, XML_FIELDS.SPECIAL_ABILITIES.ROOT)
         result = []
         for monster_ability in ability_list:
             ability = MonsterSpecialAbility()
             ability.name = self.get_attribute_text_from_entry(
-                monster_ability, self.MONSTER_FIELDS.SPECIAL_ABILITIES.NAME)
+                monster_ability, XML_FIELDS.SPECIAL_ABILITIES.NAME)
             ability.description = self.get_description(
-                monster_ability, self.MONSTER_FIELDS.SPECIAL_ABILITIES.DESCRIPTION)
+                monster_ability, XML_FIELDS.SPECIAL_ABILITIES.DESCRIPTION)
             result.append(ability)
         return result
 
@@ -64,16 +63,16 @@ class XmlMonsterAttributeParser(object):
         """
         :rtype: list of MonsterAction
         """
-        action_list = self.get_attribute_from_entry(self.entry, self.MONSTER_FIELDS.ACTIONS.ROOT)
+        action_list = self.get_attribute_from_entry(self.entry, XML_FIELDS.ACTIONS.ROOT)
         result = []
         for monster_action in action_list:
             action = MonsterAction()
-            action.name = self.get_attribute_text_from_entry(monster_action, self.MONSTER_FIELDS.ACTIONS.NAME)
+            action.name = self.get_attribute_text_from_entry(monster_action, XML_FIELDS.ACTIONS.NAME)
             """description could have multiple text lines"""
-            action.description = self.get_description(monster_action, self.MONSTER_FIELDS.ACTIONS.DESCRIPTION)
-            action.attack_bonus = self.get_attack_bonus(monster_action, self.MONSTER_FIELDS.ACTIONS.ATTACK_BONUS)
-            action.damage_dice = self.get_damage_dice(monster_action, self.MONSTER_FIELDS.ACTIONS.DAMAGE_DICE)
-            action.damage_bonus = self.get_damage_bonus(monster_action, self.MONSTER_FIELDS.ACTIONS.DAMAGE_BONUS)
+            action.description = self.get_description(monster_action, XML_FIELDS.ACTIONS.DESCRIPTION)
+            action.attack_bonus = self.get_attack_bonus(monster_action, XML_FIELDS.ACTIONS.ATTACK_BONUS)
+            action.damage_dice = self.get_damage_dice(monster_action, XML_FIELDS.ACTIONS.DAMAGE_DICE)
+            action.damage_bonus = self.get_damage_bonus(monster_action, XML_FIELDS.ACTIONS.DAMAGE_BONUS)
             result.append(action)
 
         return result
@@ -160,21 +159,21 @@ class XmlMonsterAttributeParser(object):
         """
         :rtype: list of MonsterLegendaryAction
         """
-        monster_legendary_action_list = self.get_attribute_from_entry(self.entry, self.MONSTER_FIELDS.LEGENDARY_ACTIONS.ROOT)
+        monster_legendary_action_list = self.get_attribute_from_entry(self.entry, XML_FIELDS.LEGENDARY_ACTIONS.ROOT)
         result = []
         for monster_legendary_action in monster_legendary_action_list:
             legendary_action = MonsterLegendaryAction()
             legendary_action.name = self.get_attribute_text_from_entry(
-                monster_legendary_action, self.MONSTER_FIELDS.LEGENDARY_ACTIONS.NAME)
+                monster_legendary_action, XML_FIELDS.LEGENDARY_ACTIONS.NAME)
             """description could have multiple text lines"""
             legendary_action.description = self.get_description(
-                monster_legendary_action, self.MONSTER_FIELDS.LEGENDARY_ACTIONS.DESCRIPTION)
+                monster_legendary_action, XML_FIELDS.LEGENDARY_ACTIONS.DESCRIPTION)
             legendary_action.attack_bonus = self.get_attack_bonus(
-                monster_legendary_action, self.MONSTER_FIELDS.LEGENDARY_ACTIONS.ATTACK_BONUS)
+                monster_legendary_action, XML_FIELDS.LEGENDARY_ACTIONS.ATTACK_BONUS)
             legendary_action.damage_dice = self.get_damage_dice(
-                monster_legendary_action, self.MONSTER_FIELDS.LEGENDARY_ACTIONS.DAMAGE_DICE)
+                monster_legendary_action, XML_FIELDS.LEGENDARY_ACTIONS.DAMAGE_DICE)
             legendary_action.damage_bonus = self.get_damage_bonus(
-                monster_legendary_action, self.MONSTER_FIELDS.LEGENDARY_ACTIONS.DAMAGE_BONUS)
+                monster_legendary_action, XML_FIELDS.LEGENDARY_ACTIONS.DAMAGE_BONUS)
             result.append(legendary_action)
 
         return result

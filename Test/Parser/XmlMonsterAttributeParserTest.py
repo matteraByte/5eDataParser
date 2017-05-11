@@ -3,28 +3,26 @@ import definitions
 import os
 import xml.etree.ElementTree as etree
 from Parser.XmlMonsterAttributeParser import XmlMonsterAttributeParser as AttributeParser
-from Objects.MonsterFieldsXml import MonsterFieldsXml as MonsterFields
+from Objects.MonsterFieldsXml import MonsterFieldsXml as XML_FIELDS
 from Parser.Monster import Monster, MonsterSpecialAbility
 
 
 class XmlMonsterAttributeParserTest(unittest.TestCase):
 
     def setUp(self):
-        self.MONSTER_FIELDS = MonsterFields()
-
         self.monster_entry = os.path.join(definitions.XML_RESOURCES_PATH, "Aboleth.xml")
         tree = etree.parse(self.monster_entry)
-        self.root = tree.getroot().find("monster")
+        self.root = tree.getroot().find(XML_FIELDS.MONSTER_TAG)
         self.parser = AttributeParser(self.root)
 
         self.monster_missing_fields = os.path.join(definitions.XML_RESOURCES_PATH, "MissingFields.xml")
         tree = etree.parse(self.monster_missing_fields)
-        self.root_missing_fields = tree.getroot().find("monster")
+        self.root_missing_fields = tree.getroot().find(XML_FIELDS.MONSTER_TAG)
         self.parser_missing_fields = AttributeParser(self.root_missing_fields)
 
     def test_get_attribute_from_entry(self):
 
-        result = self.parser.get_attribute_from_entry(self.root, self.MONSTER_FIELDS.NAME)
+        result = self.parser.get_attribute_from_entry(self.root, XML_FIELDS.NAME)
         self.assertEquals(len(result), 1)
 
         result = self.parser.get_attribute_from_entry(self.root, "invalid")
