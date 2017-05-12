@@ -150,9 +150,10 @@ class XmlMonsterAttributeParser(object):
         result = ""
 
         for text_node in same_node_list:
-            if result != "":
+            if result != "" or text_node.text is None:  # treat empty node as a newline
                 result += " \n"  # add a space and a newline between each text node
-            result += text_node.text
+            if text_node.text:
+                result += text_node.text
         return result
 
     def get_legendary_actions(self):
