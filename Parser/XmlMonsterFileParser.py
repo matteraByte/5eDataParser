@@ -32,8 +32,14 @@ class XmlMonsterFileParser(object):
             return []
 
     @staticmethod
-    def get_monster(entry):
-        return None
+    def get_monster(monster_element):
+        attribute_parser = AttributeParser(monster_element)
+        monster = Monster(attribute_parser.get_name())
+        monster.actions = attribute_parser.get_actions()
+        monster.special_abilities = attribute_parser.get_special_abilities()
+        monster.legendary_actions = attribute_parser.get_legendary_actions()
+        """ TODO: implement rest"""
+        return monster
 
     @staticmethod
     def get_monster_list(tree):
@@ -42,11 +48,7 @@ class XmlMonsterFileParser(object):
         monster_element_list = root_node.findall(XML_FIELDS.MONSTER_TAG)
 
         for monster_element in monster_element_list:
-            attribute_parser = AttributeParser(monster_element)
-            monster = Monster(attribute_parser.get_name())
-            monster.actions = attribute_parser.get_actions()
-            # todo: implement the rest
-            monster_list.append(monster)
+            monster_list.append(XmlMonsterFileParser.get_monster(monster_element))
         return monster_list
 
     @staticmethod
