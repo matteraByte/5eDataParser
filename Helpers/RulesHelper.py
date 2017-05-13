@@ -15,3 +15,10 @@ class RulesHelper(object):
             return "+" + str(stat_score)
         else:
             return "" + str(stat_score)
+
+    @staticmethod
+    def get_xp_for_challenge_rating(challenge_rating):
+        """:type challenge_rating int"""
+        xp = ""
+        # TODO: Implement
+        return xp
