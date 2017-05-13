@@ -45,6 +45,10 @@ class Monster(object):
         self.alignment = ""
         self.armor_class_with_description = ""
         self.speed_with_description = ""
+        self.saving_throws = ""
+        self.skills = ""
+        self.senses = ""
+        self.languages = ""
         self.challenge_rating = -1
         self.special_abilities = []
         self.actions = []

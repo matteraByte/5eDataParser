@@ -10,6 +10,9 @@ from Writer.BMDFileMonsterWriter import BMDFileMonsterWriter as FileWriter, BMDB
 class BMDFileMonsterWriterTest(unittest.TestCase):
 
     def setUp(self):
+        self.empty_monster = Monster("Empty")
+        self.empty_blob_builder = BlobBuilder(self.empty_monster)
+
         self.monster = Monster("Testermon")
         self.monster.size = "Large"
         self.monster.type = "Aborigonize"
@@ -59,6 +62,11 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
         self.monster.intelligence = 18
         self.monster.wisdom = 15
         self.monster.charisma = 18
+
+        self.monster.saving_throws = "Con +6, Int +8, Wis +6"
+        self.monster.skills = "History +12, Perception +10"
+        self.monster.senses = "darkvision 120 ft., passive Perception 20"
+        self.monster.languages = "Deep Speech, telepathy 120 ft."
 
         self.blob_builder = BlobBuilder(self.monster)
 
@@ -120,3 +128,45 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
     #                "| 21 (+5) | 9 (−1) | 15 (+2) | 18 (+4) | 15 (+2) | 18 (+4) |"
     #     result = self.blob_builder.build_stat_scores_string()
     #     self.assertEquals(result, expected)
+
+    def test_build_saving_throws_string(self):
+        expected = "**Saving Throws** Con +6, Int +8, Wis +6"
+        result = self.blob_builder.build_saving_throws_string()
+        self.assertEquals(result, expected)
+
+        expected = ""
+        result = self.empty_blob_builder.build_saving_throws_string()
+        self.assertEquals(result, expected)
+
+    def test_build_skills_string(self):
+        expected = "**Skills** History +12, Perception +10"
+        result = self.blob_builder.build_skills_string()
+        self.assertEquals(result, expected)
+
+        expected = ""
+        result = self.empty_blob_builder.build_skills_string()
+        self.assertEquals(result, expected)
+
+    def test_build_senses_string(self):
+        expected = "**Senses** darkvision 120 ft., passive Perception 20"
+        result = self.blob_builder.build_senses_string()
+        self.assertEquals(result, expected)
+
+        expected = ""
+        result = self.empty_blob_builder.build_senses_string()
+        self.assertEquals(result, expected)
+
+    def test_build_languages_string(self):
+        expected = "**Languages** Deep Speech, telepathy 120 ft."
+        result = self.blob_builder.build_languages_string()
+        self.assertEquals(result, expected)
+
+        expected = ""
+        result = self.empty_blob_builder.build_languages_string()
+        self.assertEquals(result, expected)
+
+    def test_build_challenge_rating_string(self):
+        expected = "**Challenge** 9 "
+        # TODO: Implement and test for xp conversion
+        result = self.blob_builder.build_challenge_rating_string()
+        self.assertEquals(result, expected)

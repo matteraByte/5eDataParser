@@ -126,8 +126,46 @@ class BMDBlobMonsterBuilder(object):
                              "|"
         return stat_scores_string
 
+    def build_saving_throws_string(self):
+        saving_throws_string = ""
+        if self.monster.saving_throws != "":
+            saving_throws_string += "**Saving Throws** "
+            saving_throws_string += self.monster.saving_throws
+        return saving_throws_string
 
+    def build_skills_string(self):
+        skills_string = ""
+        if self.monster.skills != "":
+            skills_string += "**Skills** "
+            skills_string += self.monster.skills
+        return skills_string
+
+    def build_senses_string(self):
+        senses_string = ""
+        if self.monster.senses != "":
+            senses_string += "**Senses** "
+            senses_string += self.monster.senses
+        return senses_string
+
+    def build_languages_string(self):
+        languages_string = ""
+        if self.monster.languages != "":
+            languages_string += "**Languages** "
+            languages_string += self.monster.languages
+        return languages_string
+
+    def build_challenge_rating_string(self):
+        challenge_rating_string = "**Challenge** " + \
+                                  str(self.monster.challenge_rating) + \
+                                  " " + \
+                                  RulesHelper.get_xp_for_challenge_rating(self.monster.challenge_rating)
+        return challenge_rating_string
+
+
+# TODO: Might include this functionality in the blob writer... rename blob writer.
 class BMDFileMonsterWriter(object):
-    def __init__(self, file_path):
+    def __init__(self, file_path, monster):
         self.file_path = file_path
-        self.json_blob_parser = None
+        self.blob_builder = BMDBlobMonsterBuilder(monster)
+        # TODO: Implement
+
