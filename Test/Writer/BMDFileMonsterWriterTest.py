@@ -68,6 +68,8 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
         self.monster.senses = "darkvision 120 ft., passive Perception 20"
         self.monster.languages = "Deep Speech, telepathy 120 ft."
 
+        self.monster.hit_points_with_hit_dice = "135 (18d10 + 36)"
+
         self.blob_builder = BlobBuilder(self.monster)
 
     def test_build_post_info(self):
@@ -76,7 +78,7 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
                    "title: \"Testermon\"\n" \
                    "date: " + time.strftime("%Y-%m-%d") + "\n" \
                    "tags: [large, aborigonize, cr9]\n" \
-                   "---\n"
+                   "---\n\n"
         post_info = self.blob_builder.build_post_info()
         self.assertEquals(post_info, expected)
 
@@ -107,17 +109,17 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
         self.assertEquals(result, expected)
 
     def test_build_type_string(self):
-        expected = "**Large aborigonize, lawful good**"
+        expected = "**Large aborigonize, lawful good**\n\n"
         result = self.blob_builder.build_type_string()
         self.assertEquals(result, expected)
 
     def test_build_armor_class_string(self):
-        expected = "**Armor Class** 17 (natural armor)"
+        expected = "**Armor Class** 17 (natural armor)\n\n"
         result = self.blob_builder.build_armor_class_string()
         self.assertEquals(result, expected)
 
     def test_build_speed_string(self):
-        expected = "**Speed** 10 ft., swim 40 ft."
+        expected = "**Speed** 10 ft., swim 40 ft.\n\n"
         result = self.blob_builder.build_speed_string()
         self.assertEquals(result, expected)
 
@@ -130,7 +132,7 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
     #     self.assertEquals(result, expected)
 
     def test_build_saving_throws_string(self):
-        expected = "**Saving Throws** Con +6, Int +8, Wis +6"
+        expected = "**Saving Throws** Con +6, Int +8, Wis +6\n\n"
         result = self.blob_builder.build_saving_throws_string()
         self.assertEquals(result, expected)
 
@@ -139,7 +141,7 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
         self.assertEquals(result, expected)
 
     def test_build_skills_string(self):
-        expected = "**Skills** History +12, Perception +10"
+        expected = "**Skills** History +12, Perception +10\n\n"
         result = self.blob_builder.build_skills_string()
         self.assertEquals(result, expected)
 
@@ -148,7 +150,7 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
         self.assertEquals(result, expected)
 
     def test_build_senses_string(self):
-        expected = "**Senses** darkvision 120 ft., passive Perception 20"
+        expected = "**Senses** darkvision 120 ft., passive Perception 20\n\n"
         result = self.blob_builder.build_senses_string()
         self.assertEquals(result, expected)
 
@@ -157,7 +159,7 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
         self.assertEquals(result, expected)
 
     def test_build_languages_string(self):
-        expected = "**Languages** Deep Speech, telepathy 120 ft."
+        expected = "**Languages** Deep Speech, telepathy 120 ft.\n\n"
         result = self.blob_builder.build_languages_string()
         self.assertEquals(result, expected)
 
@@ -166,7 +168,16 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
         self.assertEquals(result, expected)
 
     def test_build_challenge_rating_string(self):
-        expected = "**Challenge** 9 "
+        expected = "**Challenge** 9 \n\n"
         # TODO: Implement and test for xp conversion
         result = self.blob_builder.build_challenge_rating_string()
         self.assertEquals(result, expected)
+
+    def test_build_hit_points_string(self):
+        expected = "**Hit Points** 135 (18d10 + 36)\n\n"
+        result = self.blob_builder.build_hit_points_string()
+        self.assertEquals(result, expected)
+
+    def test_build_all_post(self):
+        #  TODO: figure out a test for this
+        self.blob_builder.build_all_post()

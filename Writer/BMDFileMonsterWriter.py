@@ -28,7 +28,7 @@ class BMDBlobMonsterBuilder(object):
         post_info += "tags: [" + self.monster.size.lower() + ", " + \
                      self.monster.type.lower() + ", " +\
                      "cr" + str(self.monster.challenge_rating) + "]\n"
-        post_info += "---\n"
+        post_info += "---\n\n"
 
         return post_info
 
@@ -89,15 +89,15 @@ class BMDBlobMonsterBuilder(object):
                       self.monster.type.lower() + \
                       ", " + \
                       self.monster.alignment.lower() + \
-                      "**"
+                      "**" + "\n\n"
         return type_string
 
     def build_armor_class_string(self):
-        armor_class_string = "**Armor Class** " + self.monster.armor_class_with_description
+        armor_class_string = "**Armor Class** " + self.monster.armor_class_with_description + "\n\n"
         return armor_class_string
 
     def build_speed_string(self):
-        speed_string = "**Speed** " + self.monster.speed_with_description
+        speed_string = "**Speed** " + self.monster.speed_with_description + "\n\n"
         return speed_string
 
     def build_stat_scores_string(self):
@@ -123,43 +123,67 @@ class BMDBlobMonsterBuilder(object):
                              "| " + str(intelligence_score) + " (" + intelligence_bonus_desc + ") " + \
                              "| " + str(wisdom_score) + " (" + wisdom_bonus_desc + ") " + \
                              "| " + str(charisma_score) + " (" + charisma_bonus_desc + ") " + \
-                             "|"
+                             "|" + "\n\n"
         return stat_scores_string
 
     def build_saving_throws_string(self):
         saving_throws_string = ""
         if self.monster.saving_throws != "":
             saving_throws_string += "**Saving Throws** "
-            saving_throws_string += self.monster.saving_throws
+            saving_throws_string += self.monster.saving_throws + "\n\n"
         return saving_throws_string
 
     def build_skills_string(self):
         skills_string = ""
         if self.monster.skills != "":
             skills_string += "**Skills** "
-            skills_string += self.monster.skills
+            skills_string += self.monster.skills + "\n\n"
         return skills_string
 
     def build_senses_string(self):
         senses_string = ""
         if self.monster.senses != "":
             senses_string += "**Senses** "
-            senses_string += self.monster.senses
+            senses_string += self.monster.senses + "\n\n"
         return senses_string
 
     def build_languages_string(self):
         languages_string = ""
         if self.monster.languages != "":
             languages_string += "**Languages** "
-            languages_string += self.monster.languages
+            languages_string += self.monster.languages + "\n\n"
         return languages_string
 
     def build_challenge_rating_string(self):
         challenge_rating_string = "**Challenge** " + \
                                   str(self.monster.challenge_rating) + \
                                   " " + \
-                                  RulesHelper.get_xp_for_challenge_rating(self.monster.challenge_rating)
+                                  RulesHelper.get_xp_for_challenge_rating(self.monster.challenge_rating) + "\n\n"
         return challenge_rating_string
+
+    def build_hit_points_string(self):
+        hit_points_string = "**Hit Points** " + self.monster.hit_points_with_hit_dice + "\n\n"
+        return hit_points_string
+
+    def build_all_post(self):
+        post_all = ""
+        post_all += self.build_post_info()
+        post_all += self.build_type_string()
+        post_all += self.build_armor_class_string()
+        post_all += self.build_hit_points_string()
+        post_all += self.build_speed_string()
+        post_all += self.build_stat_scores_string()
+        post_all += self.build_saving_throws_string()
+        post_all += self.build_skills_string()
+        post_all += self.build_senses_string()
+        post_all += self.build_languages_string()
+        post_all += self.build_challenge_rating_string()
+        post_all += self.build_special_abilities()  # traits
+        post_all += self.build_actions()
+        post_all += self.build_legendary_actions()
+
+        print(post_all)
+        return post_all
 
 
 # TODO: Might include this functionality in the blob writer... rename blob writer.
