@@ -57,6 +57,7 @@ class XmlMonsterFileParser(object):
         monster.type = attribute_parser.get_type()
         monster.subtype = attribute_parser.get_subtype()
         monster.alignment = attribute_parser.get_alignment()
+        monster.armor_class_with_description = attribute_parser.get_armor_class_with_description()
 
         return monster
 
