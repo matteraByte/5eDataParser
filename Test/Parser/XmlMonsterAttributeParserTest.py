@@ -4,7 +4,6 @@ import os
 import xml.etree.ElementTree as etree
 from Parser.XmlMonsterAttributeParser import XmlMonsterAttributeParser as AttributeParser
 from Objects.MonsterFieldsXml import MonsterFieldsXml as XML_FIELDS
-from Parser.Monster import Monster, MonsterSpecialAbility
 
 
 class XmlMonsterAttributeParserTest(unittest.TestCase):
@@ -35,6 +34,59 @@ class XmlMonsterAttributeParserTest(unittest.TestCase):
 
         expected = ""
         result = self.parser_missing_fields.get_name()
+        self.assertEquals(result, expected)
+
+    def test_get_type(self):
+        expected = "aberration"
+        result = self.parser.get_type()
+        self.assertEquals(result, expected)
+
+        expected = ""
+        result = self.parser_missing_fields.get_type()
+        self.assertEquals(result, expected)
+
+    def test_get_subtype(self):
+        expected = "fish"
+        result = self.parser.get_subtype()
+        self.assertEquals(result, expected)
+
+    def test_get_size(self):
+        expected = "large"
+        result = self.parser.get_size()
+        self.assertEquals(result, expected)
+
+        expected = ""
+        result = self.parser_missing_fields.get_size()
+        self.assertEquals(result, expected)
+
+    def test_get_hit_points_with_dice(self):
+        expected = "135 (18d10+36)"
+        result = self.parser.get_hit_points_with_hit_dice()
+        self.assertEquals(result, expected)
+
+    def test_get_challenge_rating(self):
+        expected = 10
+        result = self.parser.get_challenge_rating()
+        self.assertEquals(result, expected)
+
+    def test_get_languages(self):
+        expected = "Deep Speech, telepathy 120 ft."
+        result = self.parser.get_languages()
+        self.assertEquals(result, expected)
+
+    def test_get_senses(self):
+        expected = "darkvision 120 ft."
+        result = self.parser.get_senses()
+        self.assertEquals(result, expected)
+
+    def test_get_skills(self):
+        expected = "History +12, Perception +10"
+        result = self.parser.get_skills()
+        self.assertEquals(result, expected)
+
+    def test_get_saving_throws(self):
+        expected = "Con +6, Int +8, Wis +6"
+        result = self.parser.get_saving_throws()
         self.assertEquals(result, expected)
 
     def test_get_special_abilities(self):

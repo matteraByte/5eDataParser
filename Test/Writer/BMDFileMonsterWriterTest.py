@@ -13,9 +13,16 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
         self.empty_monster = Monster("Empty")
         self.empty_blob_builder = BlobBuilder(self.empty_monster)
 
+        self.no_sub_type_monster = Monster("NoSub")
+        self.no_sub_type_monster.size = "Small"
+        self.no_sub_type_monster.type = "wala"
+        self.no_sub_type_monster.alignment = "true neutral"
+        self.no_sub_type_builder = BlobBuilder(self.no_sub_type_monster)
+
         self.monster = Monster("Testermon")
-        self.monster.size = "Large"
+        self.monster.size = "large"
         self.monster.type = "Aborigonize"
+        self.monster.subtype = "fish"
         self.monster.challenge_rating = 9
 
         self.special_ability_1 = SpecialAbility()
@@ -109,8 +116,12 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
         self.assertEquals(result, expected)
 
     def test_build_type_string(self):
-        expected = "**Large aborigonize, lawful good**\n\n"
+        expected = "**Large aborigonize (fish), lawful good**\n\n"
         result = self.blob_builder.build_type_string()
+        self.assertEquals(result, expected)
+
+        expected = "**Small wala, true neutral**\n\n"
+        result = self.no_sub_type_builder.build_type_string()
         self.assertEquals(result, expected)
 
     def test_build_armor_class_string(self):
