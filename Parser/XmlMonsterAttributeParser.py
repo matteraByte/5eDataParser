@@ -85,6 +85,42 @@ class XmlMonsterAttributeParser(object):
         saving_throws = self.get_attribute(XML_FIELDS.SAVING_THROWS)
         return saving_throws
 
+    def get_dexterity(self):
+        dexterity = self.get_attribute(XML_FIELDS.DEXTERITY)
+        return int(dexterity)
+
+    def get_wisdom(self):
+        wisdom = self.get_attribute(XML_FIELDS.WISDOM)
+        return int(wisdom)
+
+    def get_charisma(self):
+        charisma = self.get_attribute(XML_FIELDS.CHARISMA)
+        return int(charisma)
+
+    def get_intelligence(self):
+        intelligence = self.get_attribute(XML_FIELDS.INTELLIGENCE)
+        return int(intelligence)
+
+    def get_strength(self):
+        strength = self.get_attribute(XML_FIELDS.STRENGTH)
+        return int(strength)
+
+    def get_constitution(self):
+        constitution = self.get_attribute(XML_FIELDS.CONSTITUTION)
+        return int(constitution)
+
+    def get_speed_with_description(self):
+        speed = self.get_attribute(XML_FIELDS.SPEED)
+        return speed
+
+    def get_armor_class_with_description(self):
+        armor_class_with_description = self.get_attribute(XML_FIELDS.ARMOR_CLASS)
+        return armor_class_with_description
+
+    def get_alignment(self):
+        alignment = self.get_attribute(XML_FIELDS.ALIGNMENT)
+        return alignment
+
     def get_special_abilities(self):
         """
         :rtype: list of MonsterSpecialAbility

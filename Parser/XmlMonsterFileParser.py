@@ -38,7 +38,26 @@ class XmlMonsterFileParser(object):
         monster.actions = attribute_parser.get_actions()
         monster.special_abilities = attribute_parser.get_special_abilities()
         monster.legendary_actions = attribute_parser.get_legendary_actions()
-        """ TODO: implement rest"""
+
+        monster.strength = attribute_parser.get_strength()
+        monster.dexterity = attribute_parser.get_dexterity()
+        monster.intelligence = attribute_parser.get_intelligence()
+        monster.constitution = attribute_parser.get_constitution()
+        monster.wisdom = attribute_parser.get_wisdom()
+        monster.charisma = attribute_parser.get_charisma()
+
+        monster.speed_with_description = attribute_parser.get_speed_with_description()
+        monster.skills = attribute_parser.get_skills()
+        monster.languages = attribute_parser.get_languages()
+        monster.saving_throws = attribute_parser.get_saving_throws()
+        monster.senses = attribute_parser.get_senses()
+        monster.challenge_rating = attribute_parser.get_challenge_rating()
+        monster.hit_points_with_hit_dice = attribute_parser.get_hit_points_with_hit_dice()
+        monster.size = attribute_parser.get_size()
+        monster.type = attribute_parser.get_type()
+        monster.subtype = attribute_parser.get_subtype()
+        monster.alignment = attribute_parser.get_alignment()
+
         return monster
 
     @staticmethod

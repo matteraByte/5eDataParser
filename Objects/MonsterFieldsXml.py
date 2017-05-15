@@ -36,6 +36,16 @@ class MonsterFieldsXml(object):
     SENSES = "senses"
     SKILLS = "skill"
     SAVING_THROWS = "save"
+    SPEED = "speed"
+    ARMOR_CLASS = "ac"
+    ALIGNMENT = "alignment"
+
+    STRENGTH = "str"
+    WISDOM = "wis"
+    CONSTITUTION = "con"
+    INTELLIGENCE = "int"
+    DEXTERITY = "dex"
+    CHARISMA = "cha"
 
     """Complex Fields"""
     SPECIAL_ABILITIES = MonsterFieldsSpecialAbilities()

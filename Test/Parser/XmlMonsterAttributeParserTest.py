@@ -89,6 +89,46 @@ class XmlMonsterAttributeParserTest(unittest.TestCase):
         result = self.parser.get_saving_throws()
         self.assertEquals(result, expected)
 
+    def test_get_stat_scores(self):
+        expected = 21
+        result = self.parser.get_strength()
+        self.assertEquals(result, expected)
+
+        expected = 15
+        result = self.parser.get_wisdom()
+        self.assertEquals(result, expected)
+
+        expected = 9
+        result = self.parser.get_dexterity()
+        self.assertEquals(result, expected)
+
+        expected = 18
+        result = self.parser.get_charisma()
+        self.assertEquals(result, expected)
+
+        expected = 18
+        result = self.parser.get_intelligence()
+        self.assertEquals(result, expected)
+
+        expected = 15
+        result = self.parser.get_constitution()
+        self.assertEquals(result, expected)
+
+    def test_get_speed_with_description(self):
+        expected = "10 ft., swim 40 ft."
+        result = self.parser.get_speed_with_description()
+        self.assertEquals(result, expected)
+
+    def test_get_armor_class_with_description(self):
+        expected = "17 (natural armor)"
+        result = self.parser.get_armor_class_with_description()
+        self.assertEquals(result, expected)
+
+    def test_get_alignment(self):
+        expected = "lawful evil"
+        result = self.parser.get_alignment()
+        self.assertEquals(result, expected)
+
     def test_get_special_abilities(self):
         special_ability_list = self.parser.get_special_abilities()
         self.assertNotEquals(len(special_ability_list), 0)
