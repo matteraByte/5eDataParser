@@ -1,12 +1,12 @@
 import logging
 import logging.config
-import definitions
+import Definitions
 import xml.etree.ElementTree as etree
 from Objects.MonsterFieldsXml import MonsterFieldsXml as XML_FIELDS
 from Parser.Monster import Monster
 from Parser.XmlMonsterAttributeParser import XmlMonsterAttributeParser as AttributeParser
 
-logging.config.fileConfig(definitions.LOGGING_CONFIG_PATH)
+logging.config.fileConfig(Definitions.LOGGING_CONFIG_PATH)
 logger = logging.getLogger('basicLog')
 
 

@@ -1,6 +1,6 @@
 import unittest
 import os
-import definitions
+import Definitions
 import xml.etree.ElementTree as etree
 from Parser.XmlMonsterFileParser import XmlMonsterFileParser
 
@@ -8,9 +8,9 @@ from Parser.XmlMonsterFileParser import XmlMonsterFileParser
 class XmlMonsterFileParserTest(unittest.TestCase):
 
     def setUp(self):
-        self.monster_srd_xml = os.path.join(definitions.XML_RESOURCES_PATH, '5e-SRD-Monsters[FIGHTCLUB].xml')
-        self.monster_xml = os.path.join(definitions.XML_RESOURCES_PATH, 'Aboleth.xml')
-        self.invalid_xml = os.path.join(definitions.XML_RESOURCES_PATH, 'InvalidXml.xml')
+        self.monster_srd_xml = os.path.join(Definitions.XML_RESOURCES_PATH, '5e-SRD-Monsters[FIGHTCLUB].xml')
+        self.monster_xml = os.path.join(Definitions.XML_RESOURCES_PATH, 'Aboleth.xml')
+        self.invalid_xml = os.path.join(Definitions.XML_RESOURCES_PATH, 'InvalidXml.xml')
         self.srd_file_parser = XmlMonsterFileParser(self.monster_srd_xml)
         self.monster_file_parser = XmlMonsterFileParser(self.monster_xml)
 

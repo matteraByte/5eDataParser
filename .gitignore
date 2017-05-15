@@ -12,6 +12,7 @@
 .idea/**/tasks.xml
 .idea/dictionaries
 .DS_Store
+Test/TestBuildFiles/
 
 # Sensitive or high-churn files:
 .idea/**/dataSources/

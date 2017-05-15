@@ -1,5 +1,6 @@
 import unittest
 import time
+import Definitions
 from Parser.Monster import Monster, \
     MonsterSpecialAbility as SpecialAbility, \
     MonsterAction as Action,\
@@ -190,5 +191,9 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
         self.assertEquals(result, expected)
 
     def test_build_all_post(self):
-        #  TODO: figure out a test for this
-        self.blob_builder.build_all_post()
+        self.assertNotEquals(self.blob_builder.build_all_post(), "")
+
+    def test_write_monster_file(self):
+        # TODO: way to test this
+        file_writer = FileWriter(Definitions.TEST_FILE_BUILD_DIRECTORY_PATH, [self.monster, self.empty_monster])
+        file_writer.write_monsters_to_files()

@@ -1,4 +1,5 @@
 import time
+import os
 from Helpers.RulesHelper import RulesHelper
 from Parser.Monster import Monster, MonsterSpecialAbility
 
@@ -10,9 +11,6 @@ class BMDBlobMonsterBuilder(object):
     def __init__(self, monster):
         self.post_date = time.strftime("%Y-%m-%d")
         self.monster = monster
-
-    def build_markup_blob(self):
-        return None
 
     def build_post_info(self):
         # ---
@@ -187,14 +185,24 @@ class BMDBlobMonsterBuilder(object):
         post_all += self.build_actions()
         post_all += self.build_legendary_actions()
 
-        print(post_all)
         return post_all
 
 
-# TODO: Might include this functionality in the blob writer... rename blob writer.
 class BMDFileMonsterWriter(object):
-    def __init__(self, file_path, monster):
-        self.file_path = file_path
-        self.blob_builder = BMDBlobMonsterBuilder(monster)
-        # TODO: Implement
+    def __init__(self, directory_path, list_of_monsters):
+        """
+        :type list_of_monsters: list of Monster
+        """
+        self.directory_path = directory_path
+        self.list_of_monsters = list_of_monsters
 
+    def write_monsters_to_files(self):
+        for monster in self.list_of_monsters:
+            blob_builder = BMDBlobMonsterBuilder(monster)
+            monster_name = blob_builder.monster.name.lower()
+            post_date = blob_builder.post_date
+            file_name = post_date + "-" + monster_name + ".markdown"
+            full_file_path = os.path.join(self.directory_path, file_name)
+            file = open(full_file_path, "w+")
+            file.write(blob_builder.build_all_post())
+            file.close()
