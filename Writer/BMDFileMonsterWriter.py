@@ -81,7 +81,7 @@ class BMDBlobMonsterBuilder(object):
                 legendary_nickname = self.monster.legendary_nickname
                 if legendary_nickname == "":
                     legendary_nickname = "The " + self.monster.name.lower()
-                legendary_actions_string += legendary_nickname + \
+                legendary_actions_string += " " + legendary_nickname + \
                                             " may use 3 legendary actions, choosing from the options below. Only "\
                                             "one legendary action option can be used at a time and only at the end " \
                                             "of another creature’s turn. " + \
@@ -210,6 +210,7 @@ class BMDBlobMonsterBuilder(object):
 
 
 class BMDFileMonsterWriter(object):
+    # TODO: Add config options to add special tags - leave tags off (multiple subtypes, source)
     def __init__(self, directory_path, list_of_monsters):
         """
         :type list_of_monsters: list of Monster

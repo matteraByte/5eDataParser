@@ -108,7 +108,7 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
         self.assertEquals(result, expected)
 
     def test_build_legendary_actions(self):
-        expected =  "**Legendary Actions**"
+        expected =  "**Legendary Actions** "
         expected += "The testermon may use 3 legendary actions, choosing from the options below. Only one legendary " \
                     "action option can be used at a time and only at the end of another creature’s turn. " \
                     "The testermon regains spent legendary actions at the start of its turn." \

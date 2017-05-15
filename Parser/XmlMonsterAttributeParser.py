@@ -263,6 +263,7 @@ class XmlMonsterAttributeParser(object):
         return result
 
     def get_source(self):
+        # TODO: Should swarm be a type? or Beast? As in ... swarm of tiny beasts
         raw_type = self.get_attribute(XML_FIELDS.SOURCE)
 
         type_split_list = raw_type.split(",")
