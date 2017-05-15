@@ -65,7 +65,7 @@ class XmlMonsterAttributeParserTest(unittest.TestCase):
         self.assertEquals(result, expected)
 
     def test_get_challenge_rating(self):
-        expected = 10
+        expected = "10"
         result = self.parser.get_challenge_rating()
         self.assertEquals(result, expected)
 

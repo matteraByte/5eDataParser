@@ -201,7 +201,7 @@ class BMDFileMonsterWriter(object):
             blob_builder = BMDBlobMonsterBuilder(monster)
             monster_name = blob_builder.monster.name.lower()
             post_date = blob_builder.post_date
-            file_name = post_date + "-" + monster_name + ".markdown"
+            file_name = post_date + "-" + monster_name.replace(" ", "-") + ".markdown"
             full_file_path = os.path.join(self.directory_path, file_name)
             file = open(full_file_path, "w+")
             file.write(blob_builder.build_all_post())

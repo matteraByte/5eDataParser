@@ -52,7 +52,7 @@ class XmlMonsterFileParserTest(unittest.TestCase):
         self.assertEquals(monster.senses, "darkvision 120 ft.")
         self.assertEquals(monster.saving_throws, "Con +6, Int +8, Wis +6")
         self.assertEquals(monster.hit_points_with_hit_dice, "135 (18d10+36)")
-        self.assertEquals(monster.challenge_rating, 10)
+        self.assertEquals(monster.challenge_rating, "10")
         self.assertEquals(monster.languages, "Deep Speech, telepathy 120 ft.")
         self.assertEquals(monster.skills, "History +12, Perception +10")
         self.assertEquals(monster.armor_class_with_description, "17 (natural armor)")

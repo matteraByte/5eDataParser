@@ -36,6 +36,7 @@ class Monster(object):
         :type special_abilities: list of MonsterSpecialAbility
         :type actions: list of MonsterAction
         :type armor_class_with_description: str
+        :type challenge_rating: str
         :type legendary_actions: list of MonsterLegendaryAction
         """
         self.name = name
@@ -51,7 +52,7 @@ class Monster(object):
         self.skills = ""
         self.senses = ""
         self.languages = ""
-        self.challenge_rating = 0
+        self.challenge_rating = ""
         self.special_abilities = []
         self.actions = []
         self.legendary_actions = []

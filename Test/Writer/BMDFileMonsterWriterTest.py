@@ -24,7 +24,7 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
         self.monster.size = "large"
         self.monster.type = "Aborigonize"
         self.monster.subtype = "fish"
-        self.monster.challenge_rating = 9
+        self.monster.challenge_rating = "9"
 
         self.special_ability_1 = SpecialAbility()
         self.special_ability_1.name = "Evil Snot"

@@ -65,9 +65,9 @@ class XmlMonsterAttributeParser(object):
     def get_challenge_rating(self):
         challenge_rating = self.get_attribute(XML_FIELDS.CHALLENGE_RATING)
         try:
-            return int(challenge_rating)
+            return challenge_rating
         except:
-            return 0
+            return ""
 
     def get_languages(self):
         languages = self.get_attribute(XML_FIELDS.LANGUAGES)

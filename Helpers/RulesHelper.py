@@ -18,7 +18,7 @@ class RulesHelper(object):
 
     @staticmethod
     def get_xp_for_challenge_rating(challenge_rating):
-        """:type challenge_rating int"""
+        """:type challenge_rating str"""
         xp = ""
         # TODO: Implement
         return xp
