@@ -37,12 +37,53 @@ class XmlMonsterAttributeParser(object):
         """Gets the name of the monster from xml node"""
         return self.get_attribute(XML_FIELDS.NAME)
 
-    # def get_size(self):
-    #     return self.get_attribute("size")
-    #
-    # def get_subtype(self):
-    #     return self.get_attribute("subtype")
-    #
+    def get_type(self):
+        raw_type = self.get_attribute(XML_FIELDS.TYPE)
+
+        return raw_type.split(",")[0].split(" ")[0]
+
+    def get_subtype(self):
+        subtype = ""
+        raw_type_and_subtype = self.get_attribute(XML_FIELDS.TYPE)
+        raw_type_list = raw_type_and_subtype.split(",")[0].split("(")
+        if len(raw_type_list) > 1:
+            subtype = ''.join(c for c in raw_type_list[1] if c not in '()')
+        return subtype
+
+    def get_size(self):
+        raw_size = self.get_attribute(XML_FIELDS.SIZE)
+        if raw_size != "":
+            for allowed_size in Monster.ALLOWED_SIZE_LIST:
+                if allowed_size[0].lower() == raw_size[0].lower():
+                    return allowed_size
+        return ""
+
+    def get_hit_points_with_hit_dice(self):
+        hit_points_with_hit_dice = self.get_attribute(XML_FIELDS.HIT_POINTS)
+        return hit_points_with_hit_dice
+
+    def get_challenge_rating(self):
+        challenge_rating = self.get_attribute(XML_FIELDS.CHALLENGE_RATING)
+        try:
+            return int(challenge_rating)
+        except:
+            return 0
+
+    def get_languages(self):
+        languages = self.get_attribute(XML_FIELDS.LANGUAGES)
+        return languages
+
+    def get_senses(self):
+        senses = self.get_attribute(XML_FIELDS.SENSES)
+        return senses
+
+    def get_skills(self):
+        skills = self.get_attribute(XML_FIELDS.SKILLS)
+        return skills
+
+    def get_saving_throws(self):
+        saving_throws = self.get_attribute(XML_FIELDS.SAVING_THROWS)
+        return saving_throws
 
     def get_special_abilities(self):
         """

@@ -1,8 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <compendium version="5">
     <monster>
-            <size>L</size>
-            <type>aberration, monster manual</type>
             <alignment>lawful evil</alignment>
             <ac>17 (natural armor)</ac>
             <hp>135 (18d10+36)</hp>

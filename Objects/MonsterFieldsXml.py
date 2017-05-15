@@ -27,9 +27,15 @@ class MonsterFieldsXml(object):
     ROOT_TAG = "compendium"
 
     """Basic Fields"""
-    NAME = 'name'
-    TYPE = 'type'
-    SIZE = 'size'
+    NAME = "name"
+    TYPE = "type"
+    SIZE = "size"
+    HIT_POINTS = "hp"
+    CHALLENGE_RATING = "cr"
+    LANGUAGES = "languages"
+    SENSES = "senses"
+    SKILLS = "skill"
+    SAVING_THROWS = "save"
 
     """Complex Fields"""
     SPECIAL_ABILITIES = MonsterFieldsSpecialAbilities()

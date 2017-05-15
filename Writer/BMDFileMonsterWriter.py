@@ -86,10 +86,15 @@ class BMDBlobMonsterBuilder(object):
         type_string = "**" + \
                       self.monster.size.capitalize() + \
                       " " + \
-                      self.monster.type.lower() + \
-                      ", " + \
-                      self.monster.alignment.lower() + \
-                      "**" + "\n\n"
+                      self.monster.type.lower()
+
+        if self.monster.subtype != "":
+            type_string += " (" + self.monster.subtype.lower() + ")"
+
+        type_string += ", " + \
+            self.monster.alignment.lower() + \
+            "**" + "\n\n"
+
         return type_string
 
     def build_armor_class_string(self):
