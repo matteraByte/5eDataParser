@@ -3,7 +3,7 @@
     <monster>
             <name>Aboleth</name>
             <size>L</size>
-            <type>aberration (fish), monster manual</type>
+            <type>aberration (fish, mogel), monster manual</type>
             <alignment>lawful evil</alignment>
             <ac>17 (natural armor)</ac>
             <hp>135 (18d10+36)</hp>

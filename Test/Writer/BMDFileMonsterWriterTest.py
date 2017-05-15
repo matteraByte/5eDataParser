@@ -76,16 +76,19 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
         self.monster.senses = "darkvision 120 ft., passive Perception 20"
         self.monster.languages = "Deep Speech, telepathy 120 ft."
 
+        self.monster.source = "Monster Manual"
+
         self.monster.hit_points_with_hit_dice = "135 (18d10 + 36)"
 
         self.blob_builder = BlobBuilder(self.monster)
 
     def test_build_post_info(self):
+        # TODO: Multiple Subtypes as tags - might be a fork
         expected = "---\n" \
                    "layout: post\n" \
                    "title: \"Testermon\"\n" \
                    "date: " + time.strftime("%Y-%m-%d") + "\n" \
-                   "tags: [large, aborigonize, cr9]\n" \
+                   "tags: [large, aborigonize, cr9, monster-manual]\n" \
                    "---\n\n"
         post_info = self.blob_builder.build_post_info()
         self.assertEquals(post_info, expected)

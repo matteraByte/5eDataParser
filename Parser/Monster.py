@@ -1,4 +1,8 @@
 class MonsterSpecialAbility(object):
+    """
+    :type name: str
+    :type description: str
+    """
     def __init__(self):
         self.name = ""
         self.description = ""
@@ -28,18 +32,18 @@ class MonsterLegendaryAction(object):
 
 class Monster(object):
     ALLOWED_SIZE_LIST = ["tiny", "small", "medium", "large", "huge", "gargantuan"]
-
+    """
+    :type name: str
+    :type legendary_nickname: str
+    :type special_abilities: list of MonsterSpecialAbility
+    :type actions: list of MonsterAction
+    :type armor_class_with_description: str
+    :type challenge_rating: str
+    :type legendary_actions: list of MonsterLegendaryAction
+    """
     def __init__(self, name):
-        """
-        :type name: str
-        :type legendary_nickname: str
-        :type special_abilities: list of MonsterSpecialAbility
-        :type actions: list of MonsterAction
-        :type armor_class_with_description: str
-        :type challenge_rating: str
-        :type legendary_actions: list of MonsterLegendaryAction
-        """
         self.name = name
+        self.source = ""
         self.legendary_nickname = ""
         self.size = ""
         self.type = ""

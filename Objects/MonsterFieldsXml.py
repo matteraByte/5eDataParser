@@ -26,6 +26,8 @@ class MonsterFieldsXml(object):
     MONSTER_TAG = "monster"
     ROOT_TAG = "compendium"
 
+    SOURCE = "type"
+
     """Basic Fields"""
     NAME = "name"
     TYPE = "type"

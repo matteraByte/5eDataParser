@@ -23,9 +23,11 @@ class XmlMonsterAttributeParser(object):
         return result
 
     def get_attribute_text_from_entry(self, xml_root, node_name):
+        result = ""
         nodes = self.get_attribute_from_entry(xml_root, node_name)
         try:
-            result = nodes[0].text
+            if nodes[0].text:
+                result = nodes[0].text
         except:
             result = ""
         return result
@@ -43,11 +45,15 @@ class XmlMonsterAttributeParser(object):
         return raw_type.split(",")[0].split(" ")[0]
 
     def get_subtype(self):
+        # TODO: list out multiple subtypes
         subtype = ""
         raw_type_and_subtype = self.get_attribute(XML_FIELDS.TYPE)
-        raw_type_list = raw_type_and_subtype.split(",")[0].split("(")
+        raw_type_and_subtype = raw_type_and_subtype.replace("(", "|")
+        raw_type_and_subtype = raw_type_and_subtype.replace(")", "|")
+        raw_type_list = raw_type_and_subtype.split("|")
         if len(raw_type_list) > 1:
-            subtype = ''.join(c for c in raw_type_list[1] if c not in '()')
+            subtype = raw_type_list[1]
+
         return subtype
 
     def get_size(self):
@@ -228,7 +234,7 @@ class XmlMonsterAttributeParser(object):
 
         for text_node in same_node_list:
             if result != "" or text_node.text is None:  # treat empty node as a newline
-                result += " \n"  # add a space and a newline between each text node
+                result += "\n"  # add a newline between each text node
             if text_node.text:
                 result += text_node.text
         return result
@@ -256,3 +262,14 @@ class XmlMonsterAttributeParser(object):
 
         return result
 
+    def get_source(self):
+        raw_type = self.get_attribute(XML_FIELDS.SOURCE)
+
+        type_split_list = raw_type.split(",")
+        if len(type_split_list) > 1:
+            source = type_split_list[len(type_split_list) - 1]
+            if source.find("(") > 0 or source.find(")") > 0:
+                return ""
+            else:
+                return source.strip()
+        return ""

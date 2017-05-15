@@ -46,7 +46,7 @@ class XmlMonsterAttributeParserTest(unittest.TestCase):
         self.assertEquals(result, expected)
 
     def test_get_subtype(self):
-        expected = "fish"
+        expected = "fish, mogel"
         result = self.parser.get_subtype()
         self.assertEquals(result, expected)
 
@@ -77,6 +77,10 @@ class XmlMonsterAttributeParserTest(unittest.TestCase):
     def test_get_senses(self):
         expected = "darkvision 120 ft."
         result = self.parser.get_senses()
+        self.assertEquals(result, expected)
+
+        expected = ""
+        result = self.parser_missing_fields.get_senses()
         self.assertEquals(result, expected)
 
     def test_get_skills(self):
@@ -205,7 +209,7 @@ class XmlMonsterAttributeParserTest(unittest.TestCase):
                                                 "different plane of existence from the target. The charmed target is "
                                                 "under the aboleth's control and can't take reactions, and the aboleth "
                                                 "and the target can communicate telepathically with each other over any"
-                                                " distance. \nWhenever the charmed target takes damage, the target can "
+                                                " distance.\nWhenever the charmed target takes damage, the target can "
                                                 "repeat the saving throw. On a success, the effect ends. No more than "
                                                 "once every 24 hours, the target can also repeat the saving throw when "
                                                 "it is at least 1 mile away from the aboleth.")
@@ -226,3 +230,9 @@ class XmlMonsterAttributeParserTest(unittest.TestCase):
         self.assertEquals(legendary_action_3.attack_bonus, 0)
         self.assertEquals(legendary_action_3.damage_bonus, 0)
         self.assertEquals(legendary_action_3.damage_dice, "3d6")
+
+    def test_get_source(self):
+        result = self.parser.get_source()
+        expected = "monster manual"
+
+        self.assertEquals(result, expected)

@@ -37,6 +37,8 @@ class XmlMonsterFileParserTest(unittest.TestCase):
         self.assertEquals(len(monster_list), 1)
         monster = monster_list[0]
 
+        self.assertEquals(monster.source, "monster manual")
+
         self.assertEquals(monster.strength, 21)
         self.assertEquals(monster.dexterity, 9)
         self.assertEquals(monster.charisma, 18)
@@ -47,7 +49,7 @@ class XmlMonsterFileParserTest(unittest.TestCase):
         self.assertEquals(monster.alignment, "lawful evil")
         self.assertEquals(monster.speed_with_description, "10 ft., swim 40 ft.")
         self.assertEquals(monster.type, "aberration")
-        self.assertEquals(monster.subtype, "fish")
+        self.assertEquals(monster.subtype, "fish, mogel")
         self.assertEquals(monster.size, "large")
         self.assertEquals(monster.senses, "darkvision 120 ft.")
         self.assertEquals(monster.saving_throws, "Con +6, Int +8, Wis +6")

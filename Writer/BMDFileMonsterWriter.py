@@ -17,7 +17,7 @@ class BMDBlobMonsterBuilder(object):
         # layout: post
         # title: "Aboleth"
         # date: 2016-02-29
-        # tags: [large, aberration, cr10]
+        # tags: [large, aberration, cr10, monster-manual]
         # ---
         post_info =  "---\n" \
                      "layout: post\n"
@@ -25,7 +25,15 @@ class BMDBlobMonsterBuilder(object):
         post_info += "date: " + self.post_date + "\n"
         post_info += "tags: [" + self.monster.size.lower() + ", " + \
                      self.monster.type.lower() + ", " +\
-                     "cr" + str(self.monster.challenge_rating) + "]\n"
+                     "cr" + str(self.monster.challenge_rating)
+        if self.monster.source != "":
+            monster_source = self.monster.source.replace(" ", "-").lower()
+            monster_source = monster_source.replace("'", "")
+            monster_source = monster_source.replace(":", "")
+            monster_source = monster_source.replace(",", "")
+            post_info += ", " + monster_source
+
+        post_info += "]\n"
         post_info += "---\n\n"
 
         return post_info
@@ -34,11 +42,16 @@ class BMDBlobMonsterBuilder(object):
         special_abilities_string = ""
 
         for monster_special_ability in self.monster.special_abilities:
+            description = monster_special_ability.description
+            # TODO: Fix this hokey replace with some regex
+            description = description.replace("\n\n", "\n")
+            description = description.replace("\n", "\n\n")
+
             special_abilities_string += "***" + \
-                                 monster_special_ability.name + \
-                                 ".*** " + \
-                                 monster_special_ability.description + \
-                                 "\n\n"
+                                        monster_special_ability.name + \
+                                        ".*** " + \
+                                        description + \
+                                        "\n\n"
         return special_abilities_string
 
     def build_actions(self):
@@ -47,10 +60,14 @@ class BMDBlobMonsterBuilder(object):
             if actions_string == "":
                 actions_string += "**Actions**\n\n"
             #  end if
+            description = monster_action.description
+            # TODO: Fix this hokey replace with some regex
+            description = description.replace("\n\n", "\n")
+            description = description.replace("\n", "\n\n")
             actions_string += "***" +\
                               monster_action.name + \
                               ".*** " + \
-                              monster_action.description + \
+                              description + \
                               "\n\n"
             #  end for each
         return actions_string
@@ -72,10 +89,14 @@ class BMDBlobMonsterBuilder(object):
                                             "at the start of its turn." \
                                             "\n\n"
             #  end if
+            description = monster_legendary_action.description
+            # TODO: Fix this hokey replace with some regex
+            description = description.replace("\n\n", "\n")
+            description = description.replace("\n", "\n\n")
             legendary_actions_string += "***" + \
                                         monster_legendary_action.name + \
                                         ".*** " + \
-                                        monster_legendary_action.description + \
+                                        description + \
                                         "\n\n"
             #  end for each
         return legendary_actions_string
@@ -202,6 +223,7 @@ class BMDFileMonsterWriter(object):
             monster_name = blob_builder.monster.name.lower()
             post_date = blob_builder.post_date
             file_name = post_date + "-" + monster_name.replace(" ", "-") + ".markdown"
+            file_name = file_name.replace("/", "-")
             full_file_path = os.path.join(self.directory_path, file_name)
             file = open(full_file_path, "w+")
             file.write(blob_builder.build_all_post())

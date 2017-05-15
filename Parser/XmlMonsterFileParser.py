@@ -34,7 +34,10 @@ class XmlMonsterFileParser(object):
     @staticmethod
     def get_monster(monster_element):
         attribute_parser = AttributeParser(monster_element)
+
         monster = Monster(attribute_parser.get_name())
+        monster.source = attribute_parser.get_source()
+
         monster.actions = attribute_parser.get_actions()
         monster.special_abilities = attribute_parser.get_special_abilities()
         monster.legendary_actions = attribute_parser.get_legendary_actions()
