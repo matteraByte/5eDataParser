@@ -31,7 +31,6 @@ class MonsterLegendaryAction(object):
 
 
 class Monster(object):
-    ALLOWED_SIZE_LIST = ["tiny", "small", "medium", "large", "huge", "gargantuan"]
     """
     :type name: str
     :type legendary_nickname: str
@@ -41,6 +40,8 @@ class Monster(object):
     :type challenge_rating: str
     :type legendary_actions: list of MonsterLegendaryAction
     """
+    ALLOWED_SIZE_LIST = ["tiny", "small", "medium", "large", "huge", "gargantuan"]
+
     def __init__(self, name):
         self.name = name
         self.source = ""
