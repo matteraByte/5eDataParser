@@ -38,14 +38,29 @@ class BMDBlobMonsterBuilder(object):
 
         return post_info
 
+    @staticmethod
+    def normalize_description(desc):
+        description = desc
+
+        # Double new line is the minimum for markup to display newlines on their own line
+        description = description.replace("\n\n", "\n")
+        description = description.replace("\n", "\n\n")
+
+        # Indents result in a code block for markup. Instead use blockquote.
+        description = description.replace("	", ">")
+
+        # Sometimes there is a bullet that isn't actually a markup bullet - usually this happens in spell lists
+        # make sure they have a space after them
+        description = description.replace("• ", "* ")
+        description = description.replace("•", "* ")
+
+        return description
+
     def build_special_abilities(self):
         special_abilities_string = ""
 
         for monster_special_ability in self.monster.special_abilities:
-            description = monster_special_ability.description
-            # TODO: Fix this hokey replace with some regex
-            description = description.replace("\n\n", "\n")
-            description = description.replace("\n", "\n\n")
+            description = self.normalize_description(monster_special_ability.description)
 
             special_abilities_string += "***" + \
                                         monster_special_ability.name + \
@@ -60,10 +75,8 @@ class BMDBlobMonsterBuilder(object):
             if actions_string == "":
                 actions_string += "**Actions**\n\n"
             #  end if
-            description = monster_action.description
-            # TODO: Fix this hokey replace with some regex
-            description = description.replace("\n\n", "\n")
-            description = description.replace("\n", "\n\n")
+
+            description = self.normalize_description(monster_action.description)
             actions_string += "***" +\
                               monster_action.name + \
                               ".*** " + \
@@ -89,10 +102,8 @@ class BMDBlobMonsterBuilder(object):
                                             "at the start of its turn." \
                                             "\n\n"
             #  end if
-            description = monster_legendary_action.description
-            # TODO: Fix this hokey replace with some regex
-            description = description.replace("\n\n", "\n")
-            description = description.replace("\n", "\n\n")
+
+            description = self.normalize_description(monster_legendary_action.description)
             legendary_actions_string += "***" + \
                                         monster_legendary_action.name + \
                                         ".*** " + \
@@ -228,6 +239,7 @@ class BMDFileMonsterWriter(object):
             post_date = blob_builder.post_date
             file_name = post_date + "-" + monster_name.replace(" ", "-") + ".markdown"
             file_name = file_name.replace("/", "-")
+            file_name = file_name.replace("'", "")
             full_file_path = os.path.join(self.directory_path, file_name)
             file = open(full_file_path, "w+")
             file.write(blob_builder.build_all_post())

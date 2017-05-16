@@ -38,6 +38,7 @@ class RulesHelper(object):
         "29": "135,000",
         "30": "155,000",
     }
+
     @staticmethod
     def get_bonus_from_score(stat_score):
         """:rtype: int"""
