@@ -179,10 +179,13 @@ class BMDBlobMonsterBuilder(object):
         return languages_string
 
     def build_challenge_rating_string(self):
+        xp = RulesHelper.get_xp_for_challenge_rating(self.monster.challenge_rating)
         challenge_rating_string = "**Challenge** " + \
-                                  str(self.monster.challenge_rating) + \
-                                  " " + \
-                                  RulesHelper.get_xp_for_challenge_rating(self.monster.challenge_rating) + "\n\n"
+                                  self.monster.challenge_rating
+        if xp != "":
+            challenge_rating_string += " (" + xp + " XP)"
+
+        challenge_rating_string += "\n\n"
         return challenge_rating_string
 
     def build_hit_points_string(self):

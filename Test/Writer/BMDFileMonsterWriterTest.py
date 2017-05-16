@@ -183,8 +183,7 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
         self.assertEquals(result, expected)
 
     def test_build_challenge_rating_string(self):
-        expected = "**Challenge** 9 \n\n"
-        # TODO: Implement and test for xp conversion
+        expected = "**Challenge** 9 (5,000 XP)\n\n"
         result = self.blob_builder.build_challenge_rating_string()
         self.assertEquals(result, expected)
 
