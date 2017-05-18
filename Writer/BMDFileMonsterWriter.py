@@ -223,6 +223,24 @@ class BMDBlobMonsterBuilder(object):
         hit_points_string = "**Hit Points** " + self.monster.hit_points_with_hit_dice + "\n\n"
         return hit_points_string
 
+    def build_condition_immunities_string(self):
+        condition_immunities_string = ""
+        if self.monster.condition_immunities != "":
+            condition_immunities_string = "**Condition Immunities** " + self.monster.condition_immunities + "\n\n"
+        return condition_immunities_string
+
+    def build_damage_immunities_string(self):
+        damage_immunities_string = ""
+        if self.monster.condition_immunities != "":
+            damage_immunities_string = "**Damage Immunities** " + self.monster.damage_immunities + "\n\n"
+        return damage_immunities_string
+
+    def build_damage_resistances_string(self):
+        damage_resistances_string = ""
+        if self.monster.damage_resistances != "":
+            damage_resistances_string = "**Damage Resistances** " + self.monster.damage_resistances + "\n\n"
+        return damage_resistances_string
+
     def build_all_post(self):
         post_all = ""
         post_all += self.build_post_info()
@@ -233,6 +251,9 @@ class BMDBlobMonsterBuilder(object):
         post_all += self.build_stat_scores_string()
         post_all += self.build_saving_throws_string()
         post_all += self.build_skills_string()
+        post_all += self.build_damage_resistances_string()
+        post_all += self.build_damage_immunities_string()
+        post_all += self.build_condition_immunities_string()
         post_all += self.build_senses_string()
         post_all += self.build_languages_string()
         post_all += self.build_challenge_rating_string()

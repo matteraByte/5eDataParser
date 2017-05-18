@@ -133,6 +133,22 @@ class XmlMonsterAttributeParserTest(unittest.TestCase):
         result = self.parser.get_alignment()
         self.assertEquals(result, expected)
 
+    def test_get_damage_resistances(self):
+        expected = "acid, cold, fire, lightning, thunder, bludgeoning, piercing, and slashing from " + \
+                   "nonmagical weapons that aren't silvered"
+        result = self.parser.get_damage_resistances()
+        self.assertEquals(result, expected)
+
+    def test_get_damage_immunities(self):
+        expected = "necrotic, poison"
+        result = self.parser.get_damage_immunities()
+        self.assertEquals(result, expected)
+
+    def test_get_condition_immunities(self):
+        expected = "charmed, grappled, paralyzed, petrified, poisoned, prone, restrained"
+        result = self.parser.get_condition_immunities()
+        self.assertEquals(result, expected)
+
     def test_get_special_abilities(self):
         special_ability_list = self.parser.get_special_abilities()
         self.assertNotEquals(len(special_ability_list), 0)

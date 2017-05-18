@@ -63,6 +63,9 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
         self.monster.alignment = "Lawful Good"
         self.monster.armor_class_with_description = "17 (natural armor)"
         self.monster.speed_with_description = "10 ft., swim 40 ft."
+        self.monster.condition_immunities = "charmed, poisoned"
+        self.monster.damage_immunities = "necrotic"
+        self.monster.damage_resistances = "fire, cold, lightning"
 
         self.monster.strength = 21
         self.monster.dexterity = 9
@@ -190,6 +193,21 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
     def test_build_hit_points_string(self):
         expected = "**Hit Points** 135 (18d10 + 36)\n\n"
         result = self.blob_builder.build_hit_points_string()
+        self.assertEquals(result, expected)
+
+    def test_build_condition_immunities_string(self):
+        expected = "**Condition Immunities** charmed, poisoned\n\n"
+        result = self.blob_builder.build_condition_immunities_string()
+        self.assertEquals(result, expected)
+
+    def test_build_damage_immunities_string(self):
+        expected = "**Damage Immunities** necrotic\n\n"
+        result = self.blob_builder.build_damage_immunities_string()
+        self.assertEquals(result, expected)
+
+    def test_build_damage_resistances_string(self):
+        expected = "**Damage Resistances** fire, cold, lightning\n\n"
+        result = self.blob_builder.build_damage_resistances_string()
         self.assertEquals(result, expected)
 
     def test_build_all_post(self):

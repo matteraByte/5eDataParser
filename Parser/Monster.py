@@ -57,6 +57,9 @@ class Monster(object):
         self.skills = ""
         self.senses = ""
         self.languages = ""
+        self.damage_resistances = ""
+        self.damage_immunities = ""
+        self.condition_immunities = ""
         self.challenge_rating = ""
         self.special_abilities = []
         self.actions = []

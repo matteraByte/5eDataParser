@@ -127,6 +127,18 @@ class XmlMonsterAttributeParser(object):
         alignment = self.get_attribute(XML_FIELDS.ALIGNMENT)
         return alignment
 
+    def get_damage_resistances(self):
+        damage_resistances = self.get_attribute(XML_FIELDS.DAMAGE_RESISTANCES)
+        return damage_resistances
+
+    def get_damage_immunities(self):
+        damage_immunities = self.get_attribute(XML_FIELDS.DAMAGE_IMMUNITIES)
+        return damage_immunities
+
+    def get_condition_immunities(self):
+        condition_immunities = self.get_attribute(XML_FIELDS.CONDITION_IMMUNITIES)
+        return condition_immunities
+
     def get_special_abilities(self):
         """
         :rtype: list of MonsterSpecialAbility
@@ -233,9 +245,14 @@ class XmlMonsterAttributeParser(object):
         result = ""
 
         for text_node in same_node_list:
-            if result != "" or text_node.text is None:  # treat empty node as a newline
+            empty_node = 0
+            text = text_node.text
+            if text is not None:
+                if text.strip(' \t\n\r') == "": # empty node
+                    empty_node = 1
+            if result != "" or text is None or empty_node == 1:  # treat empty node as a newline
                 result += "\n"  # add a newline between each text node
-            if text_node.text:
+            if text_node.text and empty_node == 0:
                 result += text_node.text
         return result
 
