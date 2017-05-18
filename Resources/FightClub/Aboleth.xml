@@ -16,6 +16,7 @@
             <cha>18</cha>
             <resist>acid, cold, fire, lightning, thunder, bludgeoning, piercing, and slashing from nonmagical weapons that aren't silvered</resist>
             <immune>necrotic, poison</immune>
+            <vulnerable>fire</vulnerable>
             <conditionImmune>charmed, grappled, paralyzed, petrified, poisoned, prone, restrained</conditionImmune>
             <save>Con +6, Int +8, Wis +6</save>
             <skill>History +12, Perception +10</skill>

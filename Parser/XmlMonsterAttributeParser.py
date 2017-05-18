@@ -127,6 +127,10 @@ class XmlMonsterAttributeParser(object):
         alignment = self.get_attribute(XML_FIELDS.ALIGNMENT)
         return alignment
 
+    def get_damage_vulnerabilities(self):
+        vulnerabilities = self.get_attribute(XML_FIELDS.DAMAGE_VULNERABILITIES)
+        return vulnerabilities
+
     def get_damage_resistances(self):
         damage_resistances = self.get_attribute(XML_FIELDS.DAMAGE_RESISTANCES)
         return damage_resistances

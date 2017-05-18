@@ -66,6 +66,7 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
         self.monster.condition_immunities = "charmed, poisoned"
         self.monster.damage_immunities = "necrotic"
         self.monster.damage_resistances = "fire, cold, lightning"
+        self.monster.damage_vulnerabilities = "fire"
 
         self.monster.strength = 21
         self.monster.dexterity = 9
@@ -208,6 +209,11 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
     def test_build_damage_resistances_string(self):
         expected = "**Damage Resistances** fire, cold, lightning\n\n"
         result = self.blob_builder.build_damage_resistances_string()
+        self.assertEquals(result, expected)
+
+    def test_build_damage_vulnerabilities_string(self):
+        expected = "**Damage Vulnerabilities** fire\n\n"
+        result = self.blob_builder.build_damage_vulnerabilities_string()
         self.assertEquals(result, expected)
 
     def test_build_all_post(self):

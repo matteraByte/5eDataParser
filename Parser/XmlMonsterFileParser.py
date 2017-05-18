@@ -49,6 +49,7 @@ class XmlMonsterFileParser(object):
         monster.wisdom = attribute_parser.get_wisdom()
         monster.charisma = attribute_parser.get_charisma()
 
+        monster.damage_vulnerabilities = attribute_parser.get_damage_vulnerabilities()
         monster.damage_resistances = attribute_parser.get_damage_resistances()
         monster.damage_immunities = attribute_parser.get_damage_immunities()
         monster.condition_immunities = attribute_parser.get_condition_immunities()

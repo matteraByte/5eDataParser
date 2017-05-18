@@ -241,6 +241,12 @@ class BMDBlobMonsterBuilder(object):
             damage_resistances_string = "**Damage Resistances** " + self.monster.damage_resistances + "\n\n"
         return damage_resistances_string
 
+    def build_damage_vulnerabilities_string(self):
+        damage_vulnerabilities_string = ""
+        if self.monster.damage_vulnerabilities != "":
+            damage_vulnerabilities_string = "**Damage Vulnerabilities** " + self.monster.damage_vulnerabilities + "\n\n"
+        return damage_vulnerabilities_string
+
     def build_all_post(self):
         post_all = ""
         post_all += self.build_post_info()
@@ -251,6 +257,7 @@ class BMDBlobMonsterBuilder(object):
         post_all += self.build_stat_scores_string()
         post_all += self.build_saving_throws_string()
         post_all += self.build_skills_string()
+        post_all += self.build_damage_vulnerabilities_string()
         post_all += self.build_damage_resistances_string()
         post_all += self.build_damage_immunities_string()
         post_all += self.build_condition_immunities_string()

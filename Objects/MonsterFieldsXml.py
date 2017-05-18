@@ -41,6 +41,7 @@ class MonsterFieldsXml(object):
     SPEED = "speed"
     ARMOR_CLASS = "ac"
     ALIGNMENT = "alignment"
+    DAMAGE_VULNERABILITIES = "vulnerable"
     DAMAGE_RESISTANCES = "resist"
     DAMAGE_IMMUNITIES = "immune"
     CONDITION_IMMUNITIES = "conditionImmune"

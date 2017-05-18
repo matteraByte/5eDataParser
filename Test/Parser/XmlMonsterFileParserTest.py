@@ -60,6 +60,7 @@ class XmlMonsterFileParserTest(unittest.TestCase):
         self.assertEquals(monster.armor_class_with_description, "17 (natural armor)")
         self.assertEquals(monster.damage_resistances, "acid, cold, fire, lightning, thunder, bludgeoning, piercing, and slashing from nonmagical weapons that aren't silvered")
         self.assertEquals(monster.damage_immunities, "necrotic, poison")
+        self.assertEquals(monster.damage_vulnerabilities, "fire")
         self.assertEquals(monster.condition_immunities, "charmed, grappled, paralyzed, petrified, poisoned, prone, restrained")
         self.assertEquals(len(monster.actions), 4)
         self.assertEquals(len(monster.special_abilities), 3)
