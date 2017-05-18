@@ -247,7 +247,7 @@ class BMDBlobMonsterBuilder(object):
 
     def build_damage_immunities_string(self):
         damage_immunities_string = ""
-        if self.monster.condition_immunities != "":
+        if self.monster.damage_immunities != "":
             damage_immunities_string = "**Damage Immunities** " + self.monster.damage_immunities + "\n\n"
         return damage_immunities_string
 
@@ -282,6 +282,7 @@ class BMDBlobMonsterBuilder(object):
         post_all += self.build_challenge_rating_string()
         post_all += self.build_special_abilities()  # traits
         post_all += self.build_actions()
+        post_all += self.build_reactions()
         post_all += self.build_legendary_actions()
 
         return post_all
