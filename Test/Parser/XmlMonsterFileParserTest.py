@@ -9,10 +9,10 @@ class XmlMonsterFileParserTest(unittest.TestCase):
 
     def setUp(self):
         self.monster_srd_xml = os.path.join(Definitions.XML_RESOURCES_PATH, '5e-SRD-Monsters[FIGHTCLUB].xml')
-        self.monster_xml = os.path.join(Definitions.XML_RESOURCES_PATH, 'Aboleth.xml')
+        self.aboleth_xml = os.path.join(Definitions.XML_RESOURCES_PATH, 'Aboleth.xml')
         self.invalid_xml = os.path.join(Definitions.XML_RESOURCES_PATH, 'InvalidXml.xml')
         self.srd_file_parser = XmlMonsterFileParser(self.monster_srd_xml)
-        self.monster_file_parser = XmlMonsterFileParser(self.monster_xml)
+        self.monster_file_parser = XmlMonsterFileParser(self.aboleth_xml)
 
     def test_get_monster_list_from_file(self):
         empty_parser = XmlMonsterFileParser()
@@ -65,4 +65,5 @@ class XmlMonsterFileParserTest(unittest.TestCase):
         self.assertEquals(len(monster.actions), 4)
         self.assertEquals(len(monster.special_abilities), 3)
         self.assertEquals(len(monster.legendary_actions), 3)
+        self.assertEquals(len(monster.reactions), 1)
 

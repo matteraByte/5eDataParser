@@ -19,6 +19,12 @@ class MonsterAction(object):
         self.damage_bonus = 0
 
 
+class MonsterReaction(object):
+    def __init__(self):
+        self.name = ""
+        self.description = ""
+
+
 class MonsterLegendaryAction(object):
     def __init__(self):
         self.name = ""
@@ -64,6 +70,7 @@ class Monster(object):
         self.challenge_rating = ""
         self.special_abilities = []
         self.actions = []
+        self.reactions = []
         self.legendary_actions = []
 
         self.strength = 10

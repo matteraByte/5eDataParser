@@ -85,6 +85,22 @@ class BMDBlobMonsterBuilder(object):
             #  end for each
         return actions_string
 
+    def build_reactions(self):
+        reactions_string = ""
+        for monster_reaction in self.monster.reactions:
+            if reactions_string == "":
+                reactions_string += "**Reactions**\n\n"
+            # end if
+
+            description = self.normalize_description(monster_reaction.description)
+            reactions_string += "***" + \
+                              monster_reaction.name + \
+                              ".*** " + \
+                              description + \
+                              "\n\n"
+            #  end for each
+        return reactions_string
+
     def build_legendary_actions(self):
         legendary_actions_string = ""
 

@@ -8,18 +8,23 @@ class MonsterFieldsActions(object):
     ROOT = 'action'
     NAME = 'name'
     DESCRIPTION = 'text'  # could be multiple nodes that need to be stitched together
-    DAMAGE_DICE = 'attack'  # need to parse out this field
-    DAMAGE_BONUS = 'attack'  # need to parse out this field
-    ATTACK_BONUS = 'attack'  # need to parse out this field
+    DAMAGE_DICE = 'attack'
+    DAMAGE_BONUS = 'attack'
+    ATTACK_BONUS = 'attack'
 
+
+class MonsterFieldsReactions(object):
+    ROOT = 'reaction'
+    NAME = 'name'
+    DESCRIPTION = 'text'  # could be multiple nodes that need to be stitched together
 
 class MonsterLegendaryActions(object):
     ROOT = 'legendary'
     NAME = 'name'
     DESCRIPTION = 'text'  # could be multiple nodes that need to be stitched together
-    DAMAGE_DICE = 'attack'  # need to parse out this field
-    DAMAGE_BONUS = 'attack'  # need to parse out this field
-    ATTACK_BONUS = 'attack'  # need to parse out this field
+    DAMAGE_DICE = 'attack'
+    DAMAGE_BONUS = 'attack'
+    ATTACK_BONUS = 'attack'
 
 
 class MonsterFieldsXml(object):
@@ -56,4 +61,5 @@ class MonsterFieldsXml(object):
     """Complex Fields"""
     SPECIAL_ABILITIES = MonsterFieldsSpecialAbilities()
     ACTIONS = MonsterFieldsActions()
+    REACTIONS = MonsterFieldsReactions()
     LEGENDARY_ACTIONS = MonsterLegendaryActions()

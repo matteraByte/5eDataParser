@@ -41,6 +41,7 @@ class XmlMonsterFileParser(object):
         monster.actions = attribute_parser.get_actions()
         monster.special_abilities = attribute_parser.get_special_abilities()
         monster.legendary_actions = attribute_parser.get_legendary_actions()
+        monster.reactions = attribute_parser.get_reactions()
 
         monster.strength = attribute_parser.get_strength()
         monster.dexterity = attribute_parser.get_dexterity()

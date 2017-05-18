@@ -1,4 +1,4 @@
-from Parser.Monster import Monster, MonsterSpecialAbility, MonsterAction, MonsterLegendaryAction
+from Parser.Monster import Monster, MonsterSpecialAbility, MonsterAction, MonsterReaction, MonsterLegendaryAction
 from Objects.MonsterFieldsXml import MonsterFieldsXml as XML_FIELDS
 
 
@@ -173,6 +173,21 @@ class XmlMonsterAttributeParser(object):
             action.damage_dice = self.get_damage_dice(monster_action, XML_FIELDS.ACTIONS.DAMAGE_DICE)
             action.damage_bonus = self.get_damage_bonus(monster_action, XML_FIELDS.ACTIONS.DAMAGE_BONUS)
             result.append(action)
+
+        return result
+
+    def get_reactions(self):
+        """
+        :rtype: list of MonsterReaction
+        """
+        reaction_list = self.get_attribute_from_entry(self.entry, XML_FIELDS.REACTIONS.ROOT)
+        result = []
+        for monster_action in reaction_list:
+            reaction = MonsterReaction()
+            reaction.name = self.get_attribute_text_from_entry(monster_action, XML_FIELDS.REACTIONS.NAME)
+            """description could have multiple text lines"""
+            reaction.description = self.get_description(monster_action, XML_FIELDS.REACTIONS.DESCRIPTION)
+            result.append(reaction)
 
         return result
 

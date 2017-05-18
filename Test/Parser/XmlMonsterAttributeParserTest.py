@@ -252,6 +252,17 @@ class XmlMonsterAttributeParserTest(unittest.TestCase):
         self.assertEquals(legendary_action_3.damage_bonus, 0)
         self.assertEquals(legendary_action_3.damage_dice, "3d6")
 
+    def test_get_reactions(self):
+        reaction_list = self.parser.get_reactions()
+        self.assertNotEquals(len(reaction_list), 0)
+
+        reaction_1 = reaction_list[0]
+
+        self.assertEquals(reaction_1.name, "Bonded Savior")
+        self.assertEquals(reaction_1.description, "When the Abolenth's ward takes damage, the Abolenth can " +
+                          "transfer the damage to itself instead. The Abolenth's damage resistance and immunity " +
+                          "don't apply to transferred damage.")
+
     def test_get_source(self):
         result = self.parser.get_source()
         expected = "monster manual"

@@ -4,6 +4,7 @@ import Definitions
 from Parser.Monster import Monster, \
     MonsterSpecialAbility as SpecialAbility, \
     MonsterAction as Action,\
+    MonsterReaction as Reaction, \
     MonsterLegendaryAction as LegendaryAction
 from Writer.BMDFileMonsterWriter import BMDFileMonsterWriter as FileWriter, BMDBlobMonsterBuilder as BlobBuilder
 
@@ -49,6 +50,12 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
 
         self.monster.actions.append(self.action_1)
         self.monster.actions.append(self.action_2)
+
+        self.reaction_1 = Reaction()
+        self.reaction_1.name = "React to it"
+        self.reaction_1.description = "You do so."
+
+        self.monster.reactions.append(self.reaction_1)
 
         self.legendary_action_1 = LegendaryAction()
         self.legendary_action_1.name = "Legendary One"
@@ -109,6 +116,13 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
         expected += "***" + self.action_1.name + ".*** " + self.action_1.description + "\n\n"
         expected += "***" + self.action_2.name + ".*** " + self.action_2.description + "\n\n"
         result = self.blob_builder.build_actions()
+        self.assertEquals(result, expected)
+
+    def test_build_reactions(self):
+        expected = "**Reactions**" \
+                   "\n\n"
+        expected += "***" + self.reaction_1.name + ".*** " + self.reaction_1.description + "\n\n"
+        result = self.blob_builder.build_reactions()
         self.assertEquals(result, expected)
 
     def test_build_legendary_actions(self):
