@@ -8,6 +8,8 @@ from Parser.Monster import Monster, \
     MonsterLegendaryAction as LegendaryAction
 from Writer.BMDFileMonsterWriter import BMDFileMonsterWriter as FileWriter, BMDBlobMonsterBuilder as BlobBuilder
 
+unittest.TestCase.maxDiff = None
+
 
 class BMDFileMonsterWriterTest(unittest.TestCase):
 
@@ -57,6 +59,10 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
 
         self.monster.reactions.append(self.reaction_1)
 
+        self.legendary_summary = "The testermon can take 3 legendary actions, choosing from the options below. " \
+                                 "Only one legendary action option can be used at a time " \
+                                 "and only at the end of another creature’s turn. The testermon " \
+                                 "regains spent legendary actions at the start of its turn."
         self.legendary_action_1 = LegendaryAction()
         self.legendary_action_1.name = "Legendary One"
         self.legendary_action_1.description = "Like oh so special."
@@ -66,6 +72,7 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
 
         self.monster.legendary_actions.append(self.legendary_action_1)
         self.monster.legendary_actions.append(self.legendary_action_2)
+        self.monster.legendary_summary = self.legendary_summary
 
         self.monster.alignment = "Lawful Good"
         self.monster.armor_class_with_description = "17 (natural armor)"
@@ -94,7 +101,7 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
         self.blob_builder = BlobBuilder(self.monster)
 
     def test_build_post_info(self):
-        # TODO: Multiple Subtypes as tags - might be a fork
+        # TODO: Multiple Subtypes as tags
         expected = "---\n" \
                    "layout: post\n" \
                    "title: \"Testermon\"\n" \
@@ -126,11 +133,8 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
         self.assertEquals(result, expected)
 
     def test_build_legendary_actions(self):
-        expected =  "**Legendary Actions**\n\n"
-        expected += "The testermon can take 3 legendary actions, choosing from the options below. Only one legendary " \
-                    "action option can be used at a time and only at the end of another creature’s turn. " \
-                    "The testermon regains spent legendary actions at the start of its turn." \
-                    "\n\n"
+        expected = "**Legendary Actions**\n\n"
+        expected += self.legendary_summary + "\n\n"
 
         expected += "***" + self.legendary_action_1.name + ".*** " + self.legendary_action_1.description + "\n\n"
         expected += "***" + self.legendary_action_2.name + ".*** " + self.legendary_action_2.description + "\n\n"

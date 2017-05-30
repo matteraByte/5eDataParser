@@ -102,49 +102,16 @@ class BMDBlobMonsterBuilder(object):
         return reactions_string
 
     def build_legendary_actions(self):
-        legendary_actions_string = ""
-
-        legendary_nickname = "The " + self.monster.name.lower()
-        legendary_summary = legendary_nickname + \
-                                    " can take 3 legendary actions, choosing from the options below. Only " \
-                                    "one legendary action option can be used at a time and only at the end " \
-                                    "of another creature’s turn. " + \
-                                    legendary_nickname + " regains spent legendary actions " \
-                                                         "at the start of its turn."
+        legendary_actions_string = "**Legendary Actions**\n\n"
+        legendary_actions_string += self.monster.legendary_summary + "\n\n"
 
         for monster_legendary_action in self.monster.legendary_actions:
-            summary_action = 0
-            # TODO: move this logic to parser and store summary in Monster object
-            if legendary_actions_string == "":
-                legendary_actions_string += "**Legendary Actions**\n\n"
-                # sometimes the legendary text is a legendary action with a name
-                # sometimes the legendary text is in the description of a legendary action with no name
-                if monster_legendary_action.name == "" or monster_legendary_action.name.lower().find("legendary action") > -1:
-                    legendary_summary = ""
-                    # sometimes the first line of text is in the name node
-                    if monster_legendary_action.name.lower().find("can take 3") > -1:
-                        legendary_summary += monster_legendary_action.name.strip()
-                        # Sometimes there is no punctuation. Shame Shame.
-                        if monster_legendary_action.name.strip().find(".") < 0:
-                            legendary_summary += "."
-                        # end if
-                        legendary_summary += " "
-                    # end if
-                    legendary_summary += monster_legendary_action.description
-                    summary_action = 1
-                # end if
-                legendary_actions_string += legendary_summary + "\n\n"
-            # end if
-
-            if summary_action == 0:
-                description = self.normalize_description(monster_legendary_action.description)
-                legendary_actions_string += "***" + \
-                                            monster_legendary_action.name + \
-                                            ".*** " + \
-                                            description + \
-                                            "\n\n"
-            # end if
-        #  end for each
+            description = self.normalize_description(monster_legendary_action.description)
+            legendary_actions_string += "***" + \
+                                        monster_legendary_action.name + \
+                                        ".*** " + \
+                                        description + \
+                                        "\n\n"
 
         return legendary_actions_string
 

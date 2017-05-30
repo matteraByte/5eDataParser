@@ -5,6 +5,8 @@ import xml.etree.ElementTree as etree
 from Parser.XmlMonsterAttributeParser import XmlMonsterAttributeParser as AttributeParser
 from Objects.MonsterFieldsXml import MonsterFieldsXml as XML_FIELDS
 
+unittest.TestCase.maxDiff = None
+
 
 class XmlMonsterAttributeParserTest(unittest.TestCase):
 
@@ -18,6 +20,11 @@ class XmlMonsterAttributeParserTest(unittest.TestCase):
         tree = etree.parse(self.monster_missing_fields)
         self.root_missing_fields = tree.getroot().find(XML_FIELDS.MONSTER_TAG)
         self.parser_missing_fields = AttributeParser(self.root_missing_fields)
+
+        self.custom_monster_entry = os.path.join(Definitions.XML_RESOURCES_PATH, "AbolethWithLegendaryDescription.xml")
+        tree = etree.parse(self.custom_monster_entry)
+        self.root = tree.getroot().find(XML_FIELDS.MONSTER_TAG)
+        self.custom_parser = AttributeParser(self.root)
 
     def test_get_attribute_from_entry(self):
 
@@ -235,6 +242,21 @@ class XmlMonsterAttributeParserTest(unittest.TestCase):
                                                 "once every 24 hours, the target can also repeat the saving throw when "
                                                 "it is at least 1 mile away from the aboleth.")
 
+    def test_get_legendary_summary(self):
+        legendary_summary = self.parser.get_legendary_summary()
+        expected = "The aboleth can take 3 legendary actions, choosing from the options " \
+                   "below. Only one legendary action option can be used at a time, and " \
+                   "only at the end of another creature's turn. The aboleth regains spent " \
+                   "legendary actions at the start of its turn."
+        self.assertEquals(legendary_summary, expected)
+
+        legendary_summary = self.custom_parser.get_legendary_summary()
+        expected = "Custom can take 3 legendary actions, choosing from the options " \
+                   "below. Only one legendary action option can be used at a time, and " \
+                   "only at the end of another creature's turn. Custom regains spent " \
+                   "legendary actions at the start of his turn."
+        self.assertEquals(legendary_summary, expected)
+
     def test_get_legendary_actions(self):
         legendary_action_list = self.parser.get_legendary_actions()
         self.assertNotEquals(len(legendary_action_list), 0)
@@ -251,6 +273,13 @@ class XmlMonsterAttributeParserTest(unittest.TestCase):
         self.assertEquals(legendary_action_3.attack_bonus, 0)
         self.assertEquals(legendary_action_3.damage_bonus, 0)
         self.assertEquals(legendary_action_3.damage_dice, "3d6")
+
+        # Make sure it skipped the fake legendary action
+        legendary_action_list = self.custom_parser.get_legendary_actions()
+        self.assertEquals(len(legendary_action_list), 3)
+        legendary_action_1 = legendary_action_list[0]
+
+        self.assertEquals(legendary_action_1.name, "Detect")
 
     def test_get_reactions(self):
         reaction_list = self.parser.get_reactions()

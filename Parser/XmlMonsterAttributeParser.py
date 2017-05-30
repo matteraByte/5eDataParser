@@ -275,6 +275,44 @@ class XmlMonsterAttributeParser(object):
                 result += text_node.text
         return result
 
+    def get_legendary_summary(self):
+        # default legendary summary
+        name = self.get_name().lower()
+        legendary_summary = "The " + name + \
+                            " can take 3 legendary actions, choosing from the options below. Only " \
+                            "one legendary action option can be used at a time, and only at the end " \
+                            "of another creature's turn. The " + \
+                            name + " regains spent legendary actions at the start of its turn."
+
+        # look for special legendary action with summary
+        monster_legendary_action_list = self.get_attribute_from_entry(self.entry, XML_FIELDS.LEGENDARY_ACTIONS.ROOT)
+        if len(monster_legendary_action_list) > 0:
+            monster_legendary_action = monster_legendary_action_list[0]
+            # sometimes the legendary text is a legendary action with a name
+            # sometimes the legendary text is in the description of a legendary action with no name
+            legendary_action_name = self.get_attribute_text_from_entry(
+                monster_legendary_action, XML_FIELDS.LEGENDARY_ACTIONS.NAME)
+            legendary_action_description = self.get_description(
+                monster_legendary_action, XML_FIELDS.LEGENDARY_ACTIONS.DESCRIPTION)
+
+            if legendary_action_name == "" or legendary_action_name.lower().find(
+                    "legendary action") > -1:
+                legendary_summary = ""
+                # sometimes the first line of text is in the name node
+                if legendary_action_name.lower().find("can take 3") > -1:
+                    legendary_summary += legendary_action_name.strip()
+                    # Sometimes there is no punctuation. Shame Shame.
+                    if legendary_action_name.strip().find(".") < 0:
+                        legendary_summary += "."
+                    # end if
+                    legendary_summary += " "
+                # end if
+                legendary_summary += legendary_action_description
+            # end if
+        # end if
+
+        return legendary_summary
+
     def get_legendary_actions(self):
         """
         :rtype: list of MonsterLegendaryAction
@@ -294,7 +332,11 @@ class XmlMonsterAttributeParser(object):
                 monster_legendary_action, XML_FIELDS.LEGENDARY_ACTIONS.DAMAGE_DICE)
             legendary_action.damage_bonus = self.get_damage_bonus(
                 monster_legendary_action, XML_FIELDS.LEGENDARY_ACTIONS.DAMAGE_BONUS)
-            result.append(legendary_action)
+
+            # Only add legendary action if it is actually a legendary action and not description text
+            if legendary_action.name != "" and legendary_action.name.lower().find(
+                    "legendary action") < 0 and legendary_action.name.lower().find("can take 3") < 0:
+                result.append(legendary_action)
 
         return result
 

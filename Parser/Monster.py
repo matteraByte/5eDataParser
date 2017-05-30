@@ -39,7 +39,6 @@ class MonsterLegendaryAction(object):
 class Monster(object):
     """
     :type name: str
-    :type legendary_nickname: str
     :type special_abilities: list of MonsterSpecialAbility
     :type actions: list of MonsterAction
     :type armor_class_with_description: str
@@ -51,7 +50,7 @@ class Monster(object):
     def __init__(self, name):
         self.name = name
         self.source = ""
-        self.legendary_nickname = ""
+        self.legendary_summary = ""
         self.size = ""
         self.type = ""
         self.subtype = ""
