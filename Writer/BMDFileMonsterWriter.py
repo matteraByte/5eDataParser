@@ -102,18 +102,21 @@ class BMDBlobMonsterBuilder(object):
         return reactions_string
 
     def build_legendary_actions(self):
-        legendary_actions_string = "**Legendary Actions**\n\n"
-        legendary_actions_string += self.monster.legendary_summary + "\n\n"
+        if len(self.monster.legendary_actions) > 0:
+            legendary_actions_string = "**Legendary Actions**\n\n"
+            legendary_actions_string += self.monster.legendary_summary + "\n\n"
 
-        for monster_legendary_action in self.monster.legendary_actions:
-            description = self.normalize_description(monster_legendary_action.description)
-            legendary_actions_string += "***" + \
-                                        monster_legendary_action.name + \
-                                        ".*** " + \
-                                        description + \
-                                        "\n\n"
+            for monster_legendary_action in self.monster.legendary_actions:
+                description = self.normalize_description(monster_legendary_action.description)
+                legendary_actions_string += "***" + \
+                                            monster_legendary_action.name + \
+                                            ".*** " + \
+                                            description + \
+                                            "\n\n"
 
-        return legendary_actions_string
+            return legendary_actions_string
+        else:
+            return ""
 
     def build_type_string(self):
         type_string = "**" + \
