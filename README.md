@@ -204,16 +204,17 @@ tags: [medium, humanoid, cr1, homebrew]
 
 ***Longbow.*** Ranged Weapon Attack: +4 to hit, range 150/600 ft., one target. Hit: 6 (1d8 + 2) piercing damage.
 ```
-[Here](https://matterabyte.github.io/bestiary/creatures/sergeant-gobbypants) is what it looks like after a build with Jekyll in the Bestiary by Chisaipete.
+This is what it looks like after a build with Jekyll in the Bestiary by Chisaipete. Live demo page is [here](https://matterabyte.github.io/bestiary/creatures/sergeant-gobbypants).
+![alt text](https://matterabyte.github.io/5eDataParser/gobbypants.png "Bestiary")
 
 A Demo Bestiary with converted XML from the SRD and the example homebrew available is available [here](https://matterabyte.github.io/bestiary/)
 
 ## Links
-[Python 3 download](https://www.python.org/downloads/) 
-[Chisaipete's Bestiary](https://github.com/chisaipete/bestiary)
-[Valloric's 5e Statblock](https://github.com/Valloric/statblock5e)
-[Fight club 5e for iOS](https://itunes.apple.com/us/app/fight-club-5th-edition/id901057473)
-[Fifth Edition DM Tools for Android](https://play.google.com/store/apps/details?id=com.wgkammerer.dmtools)
+- [Python 3 download](https://www.python.org/downloads/) 
+- [Chisaipete's Bestiary](https://github.com/chisaipete/bestiary)
+- [Valloric's 5e Statblock](https://github.com/Valloric/statblock5e)
+- [Fight club 5e for iOS](https://itunes.apple.com/us/app/fight-club-5th-edition/id901057473)
+- [Fifth Edition DM Tools for Android](https://play.google.com/store/apps/details?id=com.wgkammerer.dmtools)
 
 
 ## Known issues
