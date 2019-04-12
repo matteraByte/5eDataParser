@@ -16,6 +16,10 @@ class FetBmdBlobMonsterBuilder(object):
         self.post_date = time.strftime("%Y-%m-%d")
         self.monster = monster
 
+    @staticmethod
+    def get_line_break():
+        return ">___\n"
+
     def build_post_info(self):
         # ___
         # >## Lich
@@ -41,6 +45,7 @@ class FetBmdBlobMonsterBuilder(object):
     def normalize_description(desc):
         description = desc
 
+        #TODO: is this needed?
         # Double new line is the minimum for markup to display newlines on their own line
         description = description.replace("\n\n", "\n")
         description = description.replace("\n", "\n\n")
@@ -93,10 +98,10 @@ class FetBmdBlobMonsterBuilder(object):
 
             description = self.normalize_description(monster_reaction.description)
             reactions_string += ">***" + \
-                              monster_reaction.name + \
-                              ".*** " + \
-                              description + \
-                              "\n>\n"
+                                monster_reaction.name + \
+                                ".*** " + \
+                                description + \
+                                "\n>\n"
             #  end for each
         return reactions_string
 
@@ -237,7 +242,6 @@ class FetBmdBlobMonsterBuilder(object):
     def build_all_post(self):
         post_all = ""
         post_all += self.build_post_info()
-        post_all += self.build_type_string()
         post_all += self.build_armor_class_string()
         post_all += self.build_hit_points_string()
         post_all += self.build_speed_string()
@@ -251,6 +255,7 @@ class FetBmdBlobMonsterBuilder(object):
         post_all += self.build_senses_string()
         post_all += self.build_languages_string()
         post_all += self.build_challenge_rating_string()
+        post_all += self.get_line_break()
         post_all += self.build_special_abilities()  # traits
         post_all += self.build_actions()
         post_all += self.build_reactions()
@@ -259,8 +264,7 @@ class FetBmdBlobMonsterBuilder(object):
         return post_all
 
 
-class BMDFileMonsterWriter(object):
-    # TODO: Add config options to add special tags - leave tags off (multiple subtypes, source)
+class FetBmdFileMonsterWriter(object):
     def __init__(self, directory_path, list_of_monsters):
         """
         :type list_of_monsters: list of Monster
