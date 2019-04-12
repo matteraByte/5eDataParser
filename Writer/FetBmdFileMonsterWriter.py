@@ -170,67 +170,68 @@ class FetBmdBlobMonsterBuilder(object):
     def build_saving_throws_string(self):
         saving_throws_string = ""
         if self.monster.saving_throws != "":
-            saving_throws_string += "**Saving Throws** "
-            saving_throws_string += self.monster.saving_throws + "\n\n"
+            saving_throws_string += ">- **Saving Throws** "
+            saving_throws_string += self.monster.saving_throws + "\n"
         return saving_throws_string
 
     def build_skills_string(self):
         skills_string = ""
         if self.monster.skills != "":
-            skills_string += "**Skills** "
-            skills_string += self.monster.skills + "\n\n"
+            skills_string += ">- **Skills** "
+            skills_string += self.monster.skills + "\n"
         return skills_string
 
     def build_senses_string(self):
         senses_string = ""
         if self.monster.senses != "":
-            senses_string += "**Senses** "
-            senses_string += self.monster.senses + "\n\n"
+            senses_string += ">- **Senses** "
+            senses_string += self.monster.senses + "\n"
         return senses_string
 
     def build_languages_string(self):
         languages_string = ""
         if self.monster.languages != "":
-            languages_string += "**Languages** "
-            languages_string += self.monster.languages + "\n\n"
+            languages_string += ">- **Languages** "
+            languages_string += self.monster.languages + "\n"
         return languages_string
 
     def build_challenge_rating_string(self):
         xp = RulesHelper.get_xp_for_challenge_rating(self.monster.challenge_rating)
-        challenge_rating_string = "**Challenge** " + \
+        challenge_rating_string = ">- **Challenge** " + \
                                   self.monster.challenge_rating
         if xp != "":
             challenge_rating_string += " (" + xp + " XP)"
 
-        challenge_rating_string += "\n\n"
+        challenge_rating_string += "\n"
         return challenge_rating_string
 
     def build_hit_points_string(self):
-        hit_points_string = "**Hit Points** " + self.monster.hit_points_with_hit_dice + "\n\n"
+        hit_points_string = ">- **Hit Points** " + self.monster.hit_points_with_hit_dice + "\n"
         return hit_points_string
 
     def build_condition_immunities_string(self):
         condition_immunities_string = ""
         if self.monster.condition_immunities != "":
-            condition_immunities_string = "**Condition Immunities** " + self.monster.condition_immunities + "\n\n"
+            condition_immunities_string = ">- **Condition Immunities** " + self.monster.condition_immunities + "\n"
         return condition_immunities_string
 
     def build_damage_immunities_string(self):
         damage_immunities_string = ""
         if self.monster.damage_immunities != "":
-            damage_immunities_string = "**Damage Immunities** " + self.monster.damage_immunities + "\n\n"
+            damage_immunities_string = ">- **Damage Immunities** " + self.monster.damage_immunities + "\n"
         return damage_immunities_string
 
     def build_damage_resistances_string(self):
         damage_resistances_string = ""
         if self.monster.damage_resistances != "":
-            damage_resistances_string = "**Damage Resistances** " + self.monster.damage_resistances + "\n\n"
+            damage_resistances_string = ">- **Damage Resistances** " + self.monster.damage_resistances + "\n"
         return damage_resistances_string
 
     def build_damage_vulnerabilities_string(self):
         damage_vulnerabilities_string = ""
         if self.monster.damage_vulnerabilities != "":
-            damage_vulnerabilities_string = "**Damage Vulnerabilities** " + self.monster.damage_vulnerabilities + "\n\n"
+            damage_vulnerabilities_string = ">- **Damage Vulnerabilities** " + \
+                                            self.monster.damage_vulnerabilities + "\n"
         return damage_vulnerabilities_string
 
     def build_all_post(self):

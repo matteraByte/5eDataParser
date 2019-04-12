@@ -162,72 +162,71 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
         result = self.blob_builder.build_stat_scores_string()
         self.assertEqual(expected, result)
 
-    # TODO: beyond
     def test_build_saving_throws_string(self):
-        expected = "**Saving Throws** Con +6, Int +8, Wis +6\n\n"
+        expected = ">- **Saving Throws** Con +6, Int +8, Wis +6\n"
         result = self.blob_builder.build_saving_throws_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
         expected = ""
         result = self.empty_blob_builder.build_saving_throws_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_skills_string(self):
-        expected = "**Skills** History +12, Perception +10\n\n"
+        expected = ">- **Skills** History +12, Perception +10\n"
         result = self.blob_builder.build_skills_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
         expected = ""
         result = self.empty_blob_builder.build_skills_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_senses_string(self):
-        expected = "**Senses** darkvision 120 ft., passive Perception 20\n\n"
+        expected = ">- **Senses** darkvision 120 ft., passive Perception 20\n"
         result = self.blob_builder.build_senses_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
         expected = ""
         result = self.empty_blob_builder.build_senses_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_languages_string(self):
-        expected = "**Languages** Deep Speech, telepathy 120 ft.\n\n"
+        expected = ">- **Languages** Deep Speech, telepathy 120 ft.\n"
         result = self.blob_builder.build_languages_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
         expected = ""
         result = self.empty_blob_builder.build_languages_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_challenge_rating_string(self):
-        expected = "**Challenge** 9 (5,000 XP)\n\n"
+        expected = ">- **Challenge** 9 (5,000 XP)\n"
         result = self.blob_builder.build_challenge_rating_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_hit_points_string(self):
-        expected = "**Hit Points** 135 (18d10 + 36)\n\n"
+        expected = ">- **Hit Points** 135 (18d10 + 36)\n"
         result = self.blob_builder.build_hit_points_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_condition_immunities_string(self):
-        expected = "**Condition Immunities** charmed, poisoned\n\n"
+        expected = ">- **Condition Immunities** charmed, poisoned\n"
         result = self.blob_builder.build_condition_immunities_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_damage_immunities_string(self):
-        expected = "**Damage Immunities** necrotic\n\n"
+        expected = ">- **Damage Immunities** necrotic\n"
         result = self.blob_builder.build_damage_immunities_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_damage_resistances_string(self):
-        expected = "**Damage Resistances** fire, cold, lightning\n\n"
+        expected = ">- **Damage Resistances** fire, cold, lightning\n"
         result = self.blob_builder.build_damage_resistances_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_damage_vulnerabilities_string(self):
-        expected = "**Damage Vulnerabilities** fire\n\n"
+        expected = ">- **Damage Vulnerabilities** fire\n"
         result = self.blob_builder.build_damage_vulnerabilities_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_all_post(self):
         self.assertNotEqual(self.blob_builder.build_all_post(), "")
