@@ -107,14 +107,14 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
                    "date: " + time.strftime("%Y-%m-%d") + "\n" \
                    "tags: [large, aborigonize, cr9, monster-manual]\n" \
                    "---\n\n"
-        post_info = self.blob_builder.build_post_info()
-        self.assertEqual(post_info, expected)
+        result = self.blob_builder.build_post_info()
+        self.assertEqual(expected, result)
 
     def test_build_special_abilities(self):
         expected =  "***" + self.special_ability_1.name + ".*** " + self.special_ability_1.description + "\n\n"
         expected += "***" + self.special_ability_2.name + ".*** " + self.special_ability_2.description + "\n\n"
         result = self.blob_builder.build_special_abilities()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_actions(self):
         expected = "**Actions**" \
@@ -122,14 +122,14 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
         expected += "***" + self.action_1.name + ".*** " + self.action_1.description + "\n\n"
         expected += "***" + self.action_2.name + ".*** " + self.action_2.description + "\n\n"
         result = self.blob_builder.build_actions()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_reactions(self):
         expected = "**Reactions**" \
                    "\n\n"
         expected += "***" + self.reaction_1.name + ".*** " + self.reaction_1.description + "\n\n"
         result = self.blob_builder.build_reactions()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_legendary_actions(self):
         expected = "**Legendary Actions**\n\n"
@@ -138,100 +138,99 @@ class BMDFileMonsterWriterTest(unittest.TestCase):
         expected += "***" + self.legendary_action_1.name + ".*** " + self.legendary_action_1.description + "\n\n"
         expected += "***" + self.legendary_action_2.name + ".*** " + self.legendary_action_2.description + "\n\n"
         result = self.blob_builder.build_legendary_actions()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_type_string(self):
         expected = "**Large aborigonize (fish), lawful good**\n\n"
         result = self.blob_builder.build_type_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
         expected = "**Small wala, true neutral**\n\n"
         result = self.no_sub_type_builder.build_type_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_armor_class_string(self):
         expected = "**Armor Class** 17 (natural armor)\n\n"
         result = self.blob_builder.build_armor_class_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_speed_string(self):
         expected = "**Speed** 10 ft., swim 40 ft.\n\n"
         result = self.blob_builder.build_speed_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
-    # TODO: Figure out why this test fails.
-    # def test_build_stat_scores(self):
-    #     expected = "|   STR   |   DEX   |   CON   |   INT   |   WIS   |   CHA   |\n" \
-    #                "|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|\n" \
-    #                "| 21 (+5) | 9 (−1) | 15 (+2) | 18 (+4) | 15 (+2) | 18 (+4) |"
-    #     result = self.blob_builder.build_stat_scores_string()
-    #     self.assertEqual(result, expected)
+    def test_build_stat_scores(self):
+        expected = "|   STR   |   DEX   |   CON   |   INT   |   WIS   |   CHA   |\n" \
+                   "|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|\n" \
+                   "| 21 (+5) | 9 (-1) | 15 (+2) | 18 (+4) | 15 (+2) | 18 (+4) |\n\n"
+        result = self.blob_builder.build_stat_scores_string()
+        self.assertEqual(expected, result)
 
     def test_build_saving_throws_string(self):
         expected = "**Saving Throws** Con +6, Int +8, Wis +6\n\n"
         result = self.blob_builder.build_saving_throws_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
         expected = ""
         result = self.empty_blob_builder.build_saving_throws_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_skills_string(self):
         expected = "**Skills** History +12, Perception +10\n\n"
         result = self.blob_builder.build_skills_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
         expected = ""
         result = self.empty_blob_builder.build_skills_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_senses_string(self):
         expected = "**Senses** darkvision 120 ft., passive Perception 20\n\n"
         result = self.blob_builder.build_senses_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
         expected = ""
         result = self.empty_blob_builder.build_senses_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_languages_string(self):
         expected = "**Languages** Deep Speech, telepathy 120 ft.\n\n"
         result = self.blob_builder.build_languages_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
         expected = ""
         result = self.empty_blob_builder.build_languages_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_challenge_rating_string(self):
         expected = "**Challenge** 9 (5,000 XP)\n\n"
         result = self.blob_builder.build_challenge_rating_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_hit_points_string(self):
         expected = "**Hit Points** 135 (18d10 + 36)\n\n"
         result = self.blob_builder.build_hit_points_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_condition_immunities_string(self):
         expected = "**Condition Immunities** charmed, poisoned\n\n"
         result = self.blob_builder.build_condition_immunities_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_damage_immunities_string(self):
         expected = "**Damage Immunities** necrotic\n\n"
         result = self.blob_builder.build_damage_immunities_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_damage_resistances_string(self):
         expected = "**Damage Resistances** fire, cold, lightning\n\n"
         result = self.blob_builder.build_damage_resistances_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_damage_vulnerabilities_string(self):
         expected = "**Damage Vulnerabilities** fire\n\n"
         result = self.blob_builder.build_damage_vulnerabilities_string()
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_build_all_post(self):
         self.assertNotEqual(self.blob_builder.build_all_post(), "")
