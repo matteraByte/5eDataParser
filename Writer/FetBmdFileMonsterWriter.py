@@ -273,15 +273,11 @@ class FetBmdFileMonsterWriter(object):
         self.list_of_monsters = list_of_monsters
 
     def write_monsters_to_files(self):
+        file_name = "FetBmdOutput.md"
+        full_file_path = os.path.join(self.directory_path, file_name)
+        file = open(full_file_path, "w+")
         for monster in self.list_of_monsters:
             blob_builder = FetBmdBlobMonsterBuilder(monster)
-            monster_name = blob_builder.monster.name.lower()
-            post_date = blob_builder.post_date
-            file_name = post_date + "-" + monster_name.replace(" ", "-") + ".markdown"
-            file_name = file_name.replace("/", "-")
-            file_name = file_name.replace("'", "")
-            file_name = file_name.replace(",", "")
-            full_file_path = os.path.join(self.directory_path, file_name)
-            file = open(full_file_path, "w+")
             file.write(blob_builder.build_all_post())
-            file.close()
+
+        file.close()
